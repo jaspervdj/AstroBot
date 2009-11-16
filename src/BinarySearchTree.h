@@ -9,39 +9,6 @@ template<class K, class T>
 class BinarySearchTree
 {
     public:
-        /**
-         * An element in the tree.
-         */
-        class TreeElement
-        {
-            public:
-                /** Related elements. */
-                TreeElement *left, *right, *parent;
-
-                /** Key. */
-                K key;
-
-                /** Value. */
-                T value;
-
-                /** Constructor. */
-                TreeElement(const K &key, const T &value);
-
-                /** Destructor. */
-                ~TreeElement();
-        };
-
-    private:
-        /** Root of the tree. */
-        TreeElement *root;
-
-    protected:
-        /**
-         * Get the position of an element.
-         */
-        TreeElement **find(const K &key);
-
-    public:
         /** 
          * Constructor.
          */
@@ -73,6 +40,44 @@ class BinarySearchTree
          * @return Value of the associated key.
          */
         const T &get(const K &key);
+
+    protected:
+        /**
+         * An element in the tree.
+         */
+        class TreeElement
+        {
+            public:
+                /** Related elements. */
+                TreeElement *left, *right, *parent;
+
+                /** Key. */
+                K key;
+
+                /** Value. */
+                T value;
+
+                /**
+                 * Constructor.
+                 */
+                TreeElement(const K &key, const T &value);
+
+                /**
+                 * Destructor.
+                 */
+                ~TreeElement();
+        };
+
+        /**
+         * Get the position of an element.
+         * @param key Key to get the associated element for.
+         * @return A reference to the requested element.
+         */
+        TreeElement **find(const K &key);
+
+    private:
+        /** Root of the tree. */
+        TreeElement *root;
 };
 
 #endif
