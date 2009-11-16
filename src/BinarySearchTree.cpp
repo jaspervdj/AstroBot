@@ -1,4 +1,5 @@
 #include "BinarySearchTree.h"
+#include <exception>
 
 template<class K, class T>
 BinarySearchTree<K, T>::TreeElement::TreeElement(const K &key, const T &value)
@@ -28,7 +29,7 @@ BinarySearchTree<K, T>::~BinarySearchTree()
 }
 
 template<class K, class T> class 
-BinarySearchTree<K, T>::TreeElement **BinarySearchTree<K, T>::get(const K &key)
+BinarySearchTree<K, T>::TreeElement **BinarySearchTree<K, T>::find(const K &key)
 {
     /* Current search position in the tree. */
     TreeElement **node = &root;
@@ -43,9 +44,33 @@ BinarySearchTree<K, T>::TreeElement **BinarySearchTree<K, T>::get(const K &key)
 }
 
 template<class K, class T>
-void BinarySearchTree<K, T>::insert(const K &key, const T &value)
+void BinarySearchTree<K, T>::put(const K &key, const T &value)
 {
     /* Find a good position. */
-    TreeElement **node = get(key);
-    *node = new TreeElement(key, value);
+    TreeElement **node = find(key);
+    if(*node) (*node)->value = value;
+    else *node = new TreeElement(key, value);
+}
+
+template<class K, class T>
+bool BinarySearchTree<K, T>::contains(const K &key)
+{
+    TreeElement **node = find(key);
+    return *node != NULL;
+}
+
+template<class K, class T>
+const T &BinarySearchTree<K, T>::get(const K &key)
+{
+    class ElementNotFoundException: public std::exception
+    {
+        virtual const char* what() const throw()
+        {
+            return "No such element.";
+        }
+    };
+
+    TreeElement **node = find(key);
+    if(*node != NULL) return (*node)->value;
+    else throw ElementNotFoundException();
 }

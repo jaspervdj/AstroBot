@@ -3,4 +3,5 @@
 
 using namespace std;
 
-template class BinarySearchTree<string, string*> ;
+template class BinarySearchTree<string, string*>;
+template class BinarySearchTree<string, string>;

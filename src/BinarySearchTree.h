@@ -39,7 +39,7 @@ class BinarySearchTree
         /**
          * Get the position of an element.
          */
-        TreeElement **get(const K &key);
+        TreeElement **find(const K &key);
 
     public:
         /** 
@@ -58,7 +58,21 @@ class BinarySearchTree
          * @param key Key to insert.
          * @param value Value to insert.
          */
-        void insert(const K &key, const T &value);
+        void put(const K &key, const T &value);
+
+        /** 
+         * Check if a certain key exists in the tree.
+         * @param key Key to check.
+         * @return If this tree contains the key.
+         */
+        bool contains(const K &key);
+
+        /**
+         * Get a certain value from the tree.
+         * @param key Key to check.
+         * @return Value of the associated key.
+         */
+        const T &get(const K &key);
 };
 
 #endif

@@ -1,7 +1,7 @@
-PROJECT(AstroBoy)
+PROJECT(AstroBot)
 
 ADD_EXECUTABLE(
-    AstroBoy
+    AstroBot
     src/BinarySearchTree.h
     src/BinarySearchTree.cpp
     src/BinarySearchTest.cpp
