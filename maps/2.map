@@ -1,0 +1,8 @@
+origin 0 0
+destination 6 1
+dimension 7 2
+
+obstacle thin_wall 4 1
+obstacle trench 2 1
+obstacle thin_wall 2 0
+obstacle trench 4 0

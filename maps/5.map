@@ -1,0 +1,12 @@
+origin 2 2
+destination 4 0
+dimension 5 5
+
+obstacle thick_wall 3 3
+obstacle thick_wall 1 2
+obstacle thick_wall 3 0
+obstacle thick_wall 1 1
+obstacle thick_wall 2 3
+obstacle thick_wall 3 2
+obstacle thick_wall 1 3
+obstacle thick_wall 3 1
