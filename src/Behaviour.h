@@ -6,6 +6,16 @@ class Behaviour
 {
     public:
         /**
+         * Constructor.
+         */
+        Behaviour();
+
+        /**
+         * Destructor.
+         */
+        virtual ~Behaviour();
+
+        /**
          * Check if this Robot behaviour wants focus.
          * @return If this robot behaviour wants focus.
          */
