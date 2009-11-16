@@ -73,7 +73,7 @@ class BinarySearchTree
          * @param key Key to get the associated element for.
          * @return A reference to the requested element.
          */
-        TreeElement **find(const K &key);
+        typename BinarySearchTree::TreeElement **find(const K &key);
 
     private:
         /** Root of the tree. */

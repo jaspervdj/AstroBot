@@ -28,7 +28,7 @@ BinarySearchTree<K, T>::~BinarySearchTree()
     if(root) delete root;
 }
 
-template<class K, class T> class 
+template<class K, class T> typename 
 BinarySearchTree<K, T>::TreeElement **BinarySearchTree<K, T>::find(const K &key)
 {
     /* Current search position in the tree. */
