@@ -19,13 +19,13 @@ class Cell
          * Get X-coordinate
          * @return x
          */
-        const int &getX() const;
+        int getX() const;
         
         /**
          * Get Y-coordinate
          * @return y
          */
-        const int &getY() const;
+        int getY() const;
         
         /**
          * Accessible to the robot?
@@ -33,9 +33,9 @@ class Cell
          */
         virtual bool isAccessible() const = 0;
         
-        bool operator== (const Cell &other) const;
-        bool operator> (const Cell &other) const;
-        bool operator< (const Cell &other) const;
+        bool operator==(const Cell &other) const;
+        bool operator>(const Cell &other) const;
+        bool operator<(const Cell &other) const;
         
     private:
         /** X-coordinate */
@@ -43,7 +43,6 @@ class Cell
         
         /** Y-coordinate */
         int y;
-    
 };
 
 #endif
