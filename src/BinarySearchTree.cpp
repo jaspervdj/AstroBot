@@ -27,8 +27,8 @@ BinarySearchTree<K, T>::~BinarySearchTree()
     if(root) delete root;
 }
 
-template<class K, class T>
-BinarySearchTree<K, T>::TreeElement **BinarySearchTree<K, T>::get(const K&)
+template<class K, class T> class 
+BinarySearchTree<K, T>::TreeElement **BinarySearchTree<K, T>::get(const K &key)
 {
     /* Current search position in the tree. */
     TreeElement **node = &root;
@@ -45,35 +45,7 @@ BinarySearchTree<K, T>::TreeElement **BinarySearchTree<K, T>::get(const K&)
 template<class K, class T>
 void BinarySearchTree<K, T>::insert(const K &key, const T &value)
 {
-    /* Current search position in the tree. */
-    TreeElement *node = root;
-
-    /* Keep track of the parent. */
-    TreeElement *parent = NULL;
-
-    /* Flag to indicate we found the node. */
-    bool found = false;
-
-    while(node && !found) {
-        parent = node;
-
-        /* Smaller, take left child. */
-        if(key < node->key) {
-            node = node->left;
-        /* Larger, take right child. */
-        } else if (key > node->key) {
-            node = node->right;
-        } else {
-            /* Cannot insert element. */
-            return;
-        }
-    }
-
-    if(parent) {
-        node = new TreeElement(key, value);
-        node->parent = parent;
-        (key < node->key ? parent->left : parent->right) = node;
-    } else {
-        root = new TreeElement(key, value);
-    }
+    /* Find a good position. */
+    TreeElement **node = get(key);
+    *node = new TreeElement(key, value);
 }
