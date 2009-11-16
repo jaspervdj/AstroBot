@@ -3,8 +3,17 @@ PROJECT(AstroBot)
 ADD_EXECUTABLE(
     AstroBot
     src/Behaviour.cpp
+    src/Behaviour.h
     src/BinarySearchTree.cpp
+    src/BinarySearchTree.h
     src/Cell.cpp
+    src/Cell.h
+    src/GUI.cpp
+    src/GUI.h
+    src/Main.cpp
+    src/Map.cpp
+    src/Map.h
+    src/Orientation.h
     src/Robot.cpp
-    src/template_instantiations.cpp
+    src/Robot.h
 )

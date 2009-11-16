@@ -1,0 +1,10 @@
+*.vcproj
+*.suo
+*.ncb
+*.sln
+*.user
+*.sln
+*.dir
+CMake*
+cmake*
+Debug

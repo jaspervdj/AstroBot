@@ -9,10 +9,10 @@ using namespace std;
 
 void run(const string &fileName)
 {
-    /*Map m = Map(file_name);
+    Map m = Map(fileName);
 
     Robot r = Robot();
-    m.setRobot(&r);
+    /*m.setRobot(&r);
 
     //initialiseer Behaviours en EventListeners
 

@@ -1,6 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <string>
+
 class Cell;
 
 /** Representation of the map/environment */
