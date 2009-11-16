@@ -4,9 +4,9 @@
 class Robot {
 public:
 
-	
+    
 private:
-	
+    
 };
 
 #endif
