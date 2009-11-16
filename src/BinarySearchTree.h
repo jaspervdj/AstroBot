@@ -1,87 +1,64 @@
-/* Practicum 5, Jasper Van der Jeugt
- * BinarySearchTree.h
- */
-#ifndef H_BINARY_SEARCH_TREE
-#define H_BINARY_SEARCH_TREE
+#ifndef BINARYSEARCHTREE_H
+#define BINARYSEARCHTREE_H
 
 #include <string>
 
-/*
-	Deze klasse stelt een node voor. 
-	Deze houdt bepaalde referenties naar andere nodes bij en zijn eigen waarde.
-*/
-class TreeElement {
-public:
-	// Pointers, respectievelijk naar de root van de linkse subtree, root van de rechtse subtree en de parent node.
-	TreeElement *left, *right, *parent;
-	// The actual value of this node.
-	std::string key;
+/** A binary tree that is actually a treemap.
+ */
+template<class K, class T>
+class BinarySearchTree
+{
+    public:
+        /**
+         * An element in the tree.
+         */
+        class TreeElement
+        {
+            public:
+                /** Related elements. */
+                TreeElement *left, *right, *parent;
 
+                /** Key. */
+                K key;
 
-	// Constructors
-	TreeElement();
-	TreeElement(const std::string &k);
+                /** Value. */
+                T value;
 
-	// Destructors
-	~TreeElement();
-};
+                /** Constructor. */
+                TreeElement(const K &key, const T &value);
 
+                /** Destructor. */
+                ~TreeElement();
+        };
 
-/*
-	Deze klasse stelt de BinarySearchTree en de nodige logica voor.
-	Alle gebruikte TreeElements hangen direct of indirect vast aan de root.
-*/
-class BinarySearchTree{
-public:
+    private:
+        /** Root of the tree. */
+        TreeElement *root;
 
-	// Constructor
-	BinarySearchTree();
+    protected:
+        /**
+         * Get the position of an element.
+         */
+        TreeElement **get(const K &key);
 
-	// Kijkt of de boom leeg is
-	bool isEmpty();
+    public:
+        /** 
+         * Constructor.
+         */
+        BinarySearchTree();
 
-	// Voegt een element toe aan de boom met als value de opgegeven string.
-	// Geeft true terug als het gelukt is, geeft false terug, wanneer de waarde zich al in de boom bevindt.
-	bool insert(const std::string &key);
+        /** 
+         * Destructor.
+         */
+        ~BinarySearchTree();
 
-	// Gebruikt het binair zoek algoritme om de boom te doorzoeken naar het bestaan van de opgegeven string
-	bool contains(const std::string& key);
-
-	// Geeft een array van strings terug die het interval voorstellen van de start tot en met de stop string
-	std::string* getValuesInRange(const std::string &start, const std::string &stop, int* arraySize);
-
-	// Geeft een array van strings terug die alle elementen van de boom bevat
-	std::string* getAllValues(int* arraySize);
-
-	// destructor
-	~BinarySearchTree();
-
-private:
-	// Pointer naar de root van de boom
-	TreeElement* root;
-	// Diepte van de boom
-	double depth;
-
-	// Doorzoek de boom en geef de pointer naar het gezochte TreeElement terug. 
-	// Indien niet gevonden, geef NULL terug.
-	TreeElement* get(const std::string &key);
-
-
-	// Eigen private methodes
-
-    /* We prefer to keep track of the actual size of the tree instead of the
-     * depth. */
-    int size;
-
-    /* Function to recursively add all elements of the tree to an array. */
-    void addToArray(TreeElement *element, std::string *array, int *position)
-            const;
-
-    /* Function to recursively add all elements of the tree in a certain range
-     * to an array. */
-    void addToArray(TreeElement *element, std::string **array, int *arraySize,
-            int *position, const std::string &start, const std::string &stop)
-            const;
+        /**
+         * Insert an element into the tree. If an element with the given
+         * key already exists, this action will be ignored.
+         * @param key Key to insert.
+         * @param value Value to insert.
+         */
+        void insert(const K &key, const T &value);
 };
 
 #endif
