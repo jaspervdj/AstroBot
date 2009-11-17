@@ -7,3 +7,7 @@ Map::Map(const string &fileName)
 {
     
 }
+
+Map::~Map()
+{
+}
