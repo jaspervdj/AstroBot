@@ -30,7 +30,15 @@ void run(const string &fileName)
 
 int main(int argc, char** argv)
 {
-    // verwacht fileName van de in te laden map als argument!
-    run(string(argv[1]));
-    return 0;
+    if(argc != 2)
+    {
+        cerr << "Syntax: AstroBot <map>" << endl;
+        return 1;
+    }
+    else
+    {
+        // verwacht fileName van de in te laden map als argument!
+        run(string(argv[1]));
+        return 0;
+    }
 }
