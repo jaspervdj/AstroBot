@@ -86,28 +86,26 @@ class BinarySearchTree
          * @param parent Will contain the parent of the found node.
          * @return The requested element.
          */
-        typename BinarySearchTree::TreeElement *find(const K &key,
-                typename BinarySearchTree::TreeElement **parent);
+        TreeElement *find(const K &key, TreeElement **parent);
 
         /**
          * Splay the node once.
          * @param lower Lower of the three nodes to splay.
          * @return Next node to splay, NULL if reached root.
          */
-        typename BinarySearchTree::TreeElement *splayOnce(
-                typename BinarySearchTree::TreeElement *lower);
+        TreeElement *splayOnce(TreeElement *lower);
 
         /**
          * Splay the entire tree.
          * @param node Node to start from.
          */
-        void splay(typename BinarySearchTree::TreeElement *node);
+        void splay(TreeElement *node);
 
         /**
          * Set the root of this rree.
          * @param root The new root.
          */
-        void setRoot(typename BinarySearchTree::TreeElement *node);
+        void setRoot(TreeElement *node);
 
     private:
         /** Root of the tree. */

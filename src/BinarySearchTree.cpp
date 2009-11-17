@@ -75,7 +75,7 @@ BinarySearchTree<K, T>::TreeElement::~TreeElement()
 
 template<class K, class T>
 void BinarySearchTree<K, T>::TreeElement::setLeft(
-        BinarySearchTree<K, T>::TreeElement *left)
+        typename BinarySearchTree<K, T>::TreeElement *left)
 {
     this->left = left;
     if(left) left->parent = this;
@@ -83,14 +83,14 @@ void BinarySearchTree<K, T>::TreeElement::setLeft(
 
 template<class K, class T>
 void BinarySearchTree<K, T>::TreeElement::setRight(
-        BinarySearchTree<K, T>::TreeElement *right)
+        typename BinarySearchTree<K, T>::TreeElement *right)
 {
     this->right = right;
     if(right) right->parent = this;
 }
 
-template<class K, class T> typename 
-BinarySearchTree<K, T>::TreeElement *BinarySearchTree<K, T>::find(const K &key,
+template<class K, class T>
+typename BinarySearchTree<K, T>::TreeElement *BinarySearchTree<K, T>::find(const K &key,
         typename BinarySearchTree::TreeElement **parent)
 {
     /* Current search position in the tree. */
