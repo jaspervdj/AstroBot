@@ -12,14 +12,14 @@ void run(const string &fileName)
     Map m = Map(fileName);
 
     Robot r = Robot();
-    /*m.setRobot(&r);
+    m.setRobot(&r);
 
     //initialiseer Behaviours en EventListeners
 
     //registreer Behaviours en EventListeners
 
     //start Subsumption
-    while(!r.getDestinationReached()) {
+    /*while(!r.getDestinationReached()) {
         m.refresh();
 
         Behaviour* b = r.getFirstActiveBehaviour();
@@ -30,7 +30,15 @@ void run(const string &fileName)
 
 int main(int argc, char** argv)
 {
-    // verwacht fileName van de in te laden map als argument!
-    run(string(argv[1]));
-    return 0;
+    if(argc != 2)
+    {
+        cerr << "Syntax: AstroBot <map>" << endl;
+        return 1;
+    }
+    else
+    {
+        // verwacht fileName van de in te laden map als argument!
+        run(string(argv[1]));
+        return 0;
+    }
 }

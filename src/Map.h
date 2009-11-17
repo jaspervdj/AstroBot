@@ -6,6 +6,7 @@
 
 class Cell;
 class EventListener;
+class Robot;
 
 /** Representation of the map/environment */
 class Map
@@ -23,6 +24,11 @@ class Map
         ~Map();
 
         /**
+         * Assign robot instance
+         */
+        void setRobot(Robot *r);
+
+        /**
          * Add an eventlistener.
          * @param listener EventListener to add.
          */
@@ -38,10 +44,13 @@ class Map
         int width, height;
     
         /** Bot startposition */
-        Cell* origin;
+        Cell *origin;
     
         /** Bot endposition */
-        Cell* destination;
+        Cell *destination;
+        
+        /** Robot */
+        Robot *robot;
     
         /** EventListeners */
         std::list<EventListener*> listeners;

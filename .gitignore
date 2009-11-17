@@ -8,3 +8,7 @@
 CMake*
 cmake*
 Debug
+Makefile
+build
+*.xcodeproj
+AstroBot
