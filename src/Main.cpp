@@ -12,14 +12,14 @@ void run(const string &fileName)
     Map m = Map(fileName);
 
     Robot r = Robot();
-    /*m.setRobot(&r);
+    m.setRobot(&r);
 
     //initialiseer Behaviours en EventListeners
 
     //registreer Behaviours en EventListeners
 
     //start Subsumption
-    while(!r.getDestinationReached()) {
+    /*while(!r.getDestinationReached()) {
         m.refresh();
 
         Behaviour* b = r.getFirstActiveBehaviour();

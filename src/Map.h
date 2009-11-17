@@ -4,18 +4,26 @@
 #include <string>
 
 class Cell;
+class Robot;
 
 /** Representation of the map/environment */
 class Map
 {
     public:
-        /** constructor */
+        /**
+         * Constructor
+         */
         Map(const std::string &fileName);
         
-        /** destructor */
+        /** 
+         * Destructor
+         */
         ~Map();
         
-        
+        /**
+         * Assign robot instance
+         */
+        void setRobot(Robot *r);
     
     private:
         /** Map dimension **/
@@ -23,10 +31,13 @@ class Map
         int height;
     
         /** Bot startposition */
-        Cell* origin;
+        Cell *origin;
     
         /** Bot endposition */
-        Cell* destination;
+        Cell *destination;
+        
+        /** Robot */
+        Robot *robot;
     
 };
 
