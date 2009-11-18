@@ -28,5 +28,5 @@ ADD_EXECUTABLE(
     src/Orientation.h
     src/Robot.cpp
     src/Robot.h
-    src/template_instantiations.cpp
+    src/TemplateInstantiations.cpp
 )

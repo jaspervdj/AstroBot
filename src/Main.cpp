@@ -4,6 +4,7 @@
 
 #include "Map.h"
 #include "Robot.h"
+#include "BinarySearchTree.h"
 
 using namespace std;
 
@@ -13,6 +14,8 @@ void run(const string &fileName)
 
     Robot r = Robot();
     m.setRobot(&r);
+    
+    BinarySearchTree<int, int> *test = new BinarySearchTree<int, int>();
 
     //initialiseer Behaviours en EventListeners
 
