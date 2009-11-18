@@ -66,14 +66,48 @@ class BinarySearchTree
                  * Destructor.
                  */
                 ~TreeElement();
+
+                /**
+                 * Set left child, and parent of left child.
+                 * @param left New left child.
+                 */
+                void setLeft(TreeElement *left);
+
+                /**
+                 * Set right child, and parent of right child.
+                 * @param right New right child.
+                 */
+                void setRight(TreeElement *right);
         };
 
         /**
          * Get the position of an element.
          * @param key Key to get the associated element for.
-         * @return A reference to the requested element.
+         * @param parent Will contain the parent of the found node.
+         * @return The requested element.
          */
-        typename BinarySearchTree::TreeElement **find(const K &key);
+        typename BinarySearchTree::TreeElement *find(const K &key,
+                typename BinarySearchTree::TreeElement **parent);
+
+        /**
+         * Splay the node once.
+         * @param lower Lower of the three nodes to splay.
+         * @return Next node to splay, NULL if reached root.
+         */
+        typename BinarySearchTree::TreeElement *splayOnce(
+                typename BinarySearchTree::TreeElement *lower);
+
+        /**
+         * Splay the entire tree.
+         * @param node Node to start from.
+         */
+        void splay(typename BinarySearchTree::TreeElement *node);
+
+        /**
+         * Set the root of this rree.
+         * @param root The new root.
+         */
+        void setRoot(typename BinarySearchTree::TreeElement *node);
 
     private:
         /** Root of the tree. */

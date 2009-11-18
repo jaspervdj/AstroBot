@@ -8,12 +8,25 @@ ADD_EXECUTABLE(
     src/BinarySearchTree.h
     src/Cell.cpp
     src/Cell.h
+    src/DestinationEvent.cpp
+    src/DestinationEvent.h
+    src/DestinationEventListener.cpp
+    src/DestinationEventListener.h
+    src/Event.cpp
+    src/Event.h
+    src/EventListener.cpp
+    src/EventListener.h
     src/GUI.cpp
     src/GUI.h
     src/Main.cpp
     src/Map.cpp
     src/Map.h
+    src/ObstacleEvent.cpp
+    src/ObstacleEvent.h
+    src/ObstacleEventListener.cpp
+    src/ObstacleEventListener.h
     src/Orientation.h
     src/Robot.cpp
     src/Robot.h
+    src/template_instantiations.cpp
 )
