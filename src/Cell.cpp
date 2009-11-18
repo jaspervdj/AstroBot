@@ -20,6 +20,11 @@ int Cell::getY() const
     return y;
 }
 
+bool Cell::isAccessible() const
+{
+    return true;
+}
+
 bool Cell::operator==(const Cell &other) const
 {
     return x == other.x && y == other.y;

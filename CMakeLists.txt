@@ -27,9 +27,13 @@ ADD_EXECUTABLE(
     src/ObstacleEvent.h
     src/ObstacleEventListener.cpp
     src/ObstacleEventListener.h
+    src/ObstacleFactory.cpp
+    src/ObstacleFactory.h
     src/Orientation.h
     src/Robot.cpp
     src/Robot.h
+	src/TObstacleFactory.cpp
+	src/TObstacleFactory.h
 	src/Trench.cpp
 	src/Trench.h
     src/TemplateInstantiations.cpp

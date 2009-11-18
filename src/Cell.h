@@ -31,7 +31,7 @@ class Cell
          * Accessible to the robot?
          * @return ok
          */
-        virtual bool isAccessible() const = 0;
+        virtual bool isAccessible() const;
         
         bool operator==(const Cell &other) const;
         bool operator>(const Cell &other) const;
