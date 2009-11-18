@@ -21,6 +21,8 @@ ADD_EXECUTABLE(
     src/Main.cpp
     src/Map.cpp
     src/Map.h
+	src/Obstacle.cpp
+	src/Obstacle.h
     src/ObstacleEvent.cpp
     src/ObstacleEvent.h
     src/ObstacleEventListener.cpp
@@ -28,5 +30,7 @@ ADD_EXECUTABLE(
     src/Orientation.h
     src/Robot.cpp
     src/Robot.h
+	src/Trench.cpp
+	src/Trench.h
     src/TemplateInstantiations.cpp
 )
