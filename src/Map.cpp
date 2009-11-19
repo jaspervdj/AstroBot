@@ -8,12 +8,16 @@
 #include "Obstacle.h"
 #include "Trench.h"
 #include "ObstacleEventListener.h"
+#include "TObstacleFactory.h"
 #include "Robot.h"
 
 using namespace std;
 
 Map::Map(const string &fileName)
 {
+    /* Initialize as NULL. */
+    origin = destination = NULL;
+
     /* Open the file. */
     ifstream file(fileName.c_str(), ios_base::in);
 
@@ -40,30 +44,31 @@ Map::Map(const string &fileName)
             cout << "Dimension (" << width << ", " << height << ");" << endl;
         /* Obstacle. */
         } else if(command == "obstacle") {
-
-
+            /* Check the type of the obstacle. */
+            string type;
+            file >> type;
+            ObstacleFactory **factory = factories->get(type);
+            /* Factroy found, let it create an object. */
+            if(factory) {
+                int x, y;
+                file >> x >> y;
+                Obstacle *obstacle = (*factory)->createObstacle(x, y);
+                cout << "Created obstacle of type \"" << type << "\" at (" <<
+                        x << ", " << y << ");" << endl;
+                delete obstacle;
+            /* No such obstacle. */
+            } else {
+                cerr << "Warning: no obstacle of type \"" <<
+                        type << "\"" << endl;
+            }
         }
     }
-
-    /* Read in file. */
-
-    Trench t(1, 2);
-    
-    cout << t.getX() << "-" << t.getY() << endl;
-    
-    // how I read file?
-    // files goes into program
-    // how is babby formed
-    
-    char input[255];
-    file.getline(input, 255);
-    cout << input;// << endl;
-    //file.getline(input, 255);
-    //cout << input << endl;
 }
 
 Map::~Map()
 {
+    if(origin) delete origin;
+    if(destination) delete destination;
 }
 
 void Map::setRobot(Robot *r)
@@ -82,3 +87,18 @@ void Map::refresh()
             i != listeners.end(); i++) {
     }
 }
+
+/** Function to create initial obstacle factories. */
+BinarySearchTree<string, ObstacleFactory*> *createObstacleFactories()
+{
+    static BinarySearchTree<string, ObstacleFactory*> factories;
+
+    static TrenchObstacleFactory trenchObstacleFactory;
+    factories.put("trench", &trenchObstacleFactory);
+
+    return &factories;
+}
+
+/* Implementation of our static factories. */
+BinarySearchTree<string, ObstacleFactory*> *Map::factories =
+        createObstacleFactories();

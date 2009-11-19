@@ -1,12 +1,14 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "BinarySearchTree.h"
 #include <list>
 #include <string>
 
 class Cell;
 class EventListener;
 class Robot;
+class ObstacleFactory;
 
 /** Representation of the map/environment */
 class Map
@@ -54,6 +56,9 @@ class Map
     
         /** EventListeners */
         std::list<EventListener*> listeners;
+
+        /** Factories to create objects. */
+        static BinarySearchTree<std::string, ObstacleFactory*> *factories;
 };
 
 #endif
