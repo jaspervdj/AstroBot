@@ -16,6 +16,7 @@ void run(const string &fileName)
     m.setRobot(&r);
     
     BinarySearchTree<int, int> *test = new BinarySearchTree<int, int>();
+    delete test;
 
     //initialiseer Behaviours en EventListeners
 

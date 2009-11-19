@@ -1,5 +1,4 @@
 #include "BinarySearchTree.h"
-#include <exception>
 
 template<class K, class T>
 BinarySearchTree<K, T>::BinarySearchTree()
@@ -47,23 +46,15 @@ bool BinarySearchTree<K, T>::contains(const K &key)
 }
 
 template<class K, class T>
-const T &BinarySearchTree<K, T>::get(const K &key)
+T *BinarySearchTree<K, T>::get(const K &key)
 {
     TreeElement *parent;
     TreeElement *node = find(key, &parent);
     splay(node);
     if(node != NULL) {
-        return node->value;
+        return &node->value;
     } else {
-        class ElementNotFoundException: public std::exception
-        {
-            virtual const char* what() const throw()
-            {
-                return "No such element.";
-            }
-        };
-        
-        throw ElementNotFoundException();
+        return NULL;
     }
 }
 

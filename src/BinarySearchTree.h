@@ -37,9 +37,9 @@ class BinarySearchTree
         /**
          * Get a certain value from the tree.
          * @param key Key to check.
-         * @return Value of the associated key.
+         * @return Pointer to value of the associated key. NULL if not found.
          */
-        const T &get(const K &key);
+        T *get(const K &key);
 
     protected:
         /**
