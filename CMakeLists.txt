@@ -32,6 +32,8 @@ ADD_EXECUTABLE(
     src/Orientation.h
     src/Robot.cpp
     src/Robot.h
+    src/Simulation.cpp
+    src/Simulation.h
     src/TObstacleFactory.cpp
     src/TObstacleFactory.h
     src/ThickWall.cpp
