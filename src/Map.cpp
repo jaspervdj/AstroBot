@@ -6,7 +6,6 @@
 #include "Map.h"
 #include "Cell.h"
 #include "Obstacle.h"
-#include "Trench.h"
 #include "ObstacleEventListener.h"
 #include "TObstacleFactory.h"
 #include "Robot.h"
@@ -92,6 +91,12 @@ void Map::refresh()
 BinarySearchTree<string, ObstacleFactory*> *createObstacleFactories()
 {
     static BinarySearchTree<string, ObstacleFactory*> factories;
+
+    static ThickWallObstacleFactory thickWallObstacleFactory;
+    factories.put("thick_wall", &thickWallObstacleFactory);
+
+    static ThinWallObstacleFactory thinWallObstacleFactory;
+    factories.put("thin_wall", &thinWallObstacleFactory);
 
     static TrenchObstacleFactory trenchObstacleFactory;
     factories.put("trench", &trenchObstacleFactory);

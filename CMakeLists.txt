@@ -34,6 +34,10 @@ ADD_EXECUTABLE(
     src/Robot.h
 	src/TObstacleFactory.cpp
 	src/TObstacleFactory.h
+    src/ThickWall.cpp
+    src/ThickWall.h
+    src/ThinWall.cpp
+    src/ThinWall.h
 	src/Trench.cpp
 	src/Trench.h
     src/TemplateInstantiations.cpp

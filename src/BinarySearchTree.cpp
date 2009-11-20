@@ -26,7 +26,7 @@ void BinarySearchTree<K, T>::put(const K &key, const T &value)
     } else {
         node = new TreeElement(key, value);
         if(parent) {
-            if(node->value < parent->value) parent->setLeft(node);
+            if(node->key < parent->key) parent->setLeft(node);
             else parent->setRight(node);
         } else {
             setRoot(node);

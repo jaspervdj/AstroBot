@@ -6,6 +6,7 @@ template class BinarySearchTree<int, int>;
 template class BinarySearchTree<std::string, ObstacleFactory*>;
 
 #include "TObstacleFactory.cpp"
-#include "Trench.h"
 
+template class TObstacleFactory<ThickWall>;
+template class TObstacleFactory<ThinWall>;
 template class TObstacleFactory<Trench>;
