@@ -9,6 +9,7 @@ class Cell;
 class EventListener;
 class Robot;
 class ObstacleFactory;
+class Obstacle;
 
 /** Representation of the map/environment */
 class Map
@@ -40,6 +41,13 @@ class Map
          * Notify EventListeners of pending events.
          */
         void refresh();
+
+    protected:
+        /**
+         * Get the key for a certain cell.
+         * @param The key for a certain cell.
+         */
+        int getKey(Cell *cell) const;
     
     private:
         /** Map dimensions **/
@@ -56,6 +64,9 @@ class Map
     
         /** EventListeners */
         std::list<EventListener*> listeners;
+
+        /** Obstacles in the map. */
+        BinarySearchTree<int, Obstacle*> obstacles;
 
         /** Factories to create objects. */
         static BinarySearchTree<std::string, ObstacleFactory*> *factories;

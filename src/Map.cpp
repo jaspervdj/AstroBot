@@ -54,7 +54,7 @@ Map::Map(const string &fileName)
                 Obstacle *obstacle = (*factory)->createObstacle(x, y);
                 cout << "Created obstacle of type \"" << type << "\" at (" <<
                         x << ", " << y << ");" << endl;
-                delete obstacle;
+                obstacles.put(getKey(obstacle), obstacle);
             /* No such obstacle. */
             } else {
                 cerr << "Warning: no obstacle of type \"" <<
@@ -68,6 +68,13 @@ Map::~Map()
 {
     if(origin) delete origin;
     if(destination) delete destination;
+
+    int arraySize;
+    Obstacle **allObstacles = obstacles.getAllValues(arraySize);
+    for(int i = 0; i < arraySize; i++) {
+        delete allObstacles[i];
+    }
+    delete[] allObstacles;
 }
 
 void Map::setRobot(Robot *r)
@@ -84,7 +91,13 @@ void Map::refresh()
 {
     for(list<EventListener*>::iterator i = listeners.begin();
             i != listeners.end(); i++) {
+        EventListener *listener = *i;
     }
+}
+
+int Map::getKey(Cell *cell) const
+{
+    return cell->getY() * width + cell->getX();
 }
 
 /** Function to create initial obstacle factories. */

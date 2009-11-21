@@ -1,6 +1,7 @@
 #include "Simulation.h"
 #include "Map.h"
 #include "Robot.h"
+#include "DestinationReachedBehaviour.h"
 
 using namespace std;
 
@@ -22,16 +23,17 @@ Simulation::~Simulation()
 
 void Simulation::run()
 {
+    DestinationReachedBehaviour destinationReachedBehaviour;
+    map->registerListener(&destinationReachedBehaviour);
+    robot->registerBehaviour(&destinationReachedBehaviour);
     //initialiseer Behaviours en EventListeners
 
     //registreer Behaviours en EventListeners
 
-    //start Subsumption
-    /*while(!r.getDestinationReached()) {
-        m.refresh();
-
-        Behaviour* b = r.getFirstActiveBehaviour();
-
-        b->action();
-    }*/
+    /* start Subsumption */
+    /* while(!robot->isDestinationReached()) {
+        map->refresh();
+        Behaviour *behaviour = robot->getFirstActiveBehaviour();
+        behaviour->action();
+    } */
 }

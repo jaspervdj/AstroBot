@@ -13,11 +13,6 @@ Robot::Robot()
 
 Robot::~Robot()
 {
-    /* Delete behaviours. */
-    for(list<Behaviour*>::iterator i = behaviours.begin();
-            i != behaviours.end(); i++) {
-        delete (*i);
-    }
 }
 
 bool Robot::isDestinationReached() const
@@ -53,6 +48,7 @@ void Robot::setOrientation(Orientation orientation)
 void Robot::registerBehaviour(Behaviour *behaviour)
 {
     behaviours.push_back(behaviour);
+    behaviour->setRobot(this);
 }
 
 Behaviour *Robot::getFirstActiveBehaviour()

@@ -1,9 +1,10 @@
 #include "BinarySearchTree.cpp"
 #include <string>
 class ObstacleFactory;
+class Obstacle;
 
-template class BinarySearchTree<int, int>;
 template class BinarySearchTree<std::string, ObstacleFactory*>;
+template class BinarySearchTree<int, Obstacle*>;
 
 #include "TObstacleFactory.cpp"
 
