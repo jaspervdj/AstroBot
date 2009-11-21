@@ -178,6 +178,8 @@ BinarySearchTree<K, T>::TreeElement *BinarySearchTree<K, T>::splayOnce(
         else
             originalParent->setRight(newUpper);
     }
+
+    return newUpper;
 }
 
 template<class K, class T>
