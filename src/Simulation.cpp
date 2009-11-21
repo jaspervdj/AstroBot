@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "Robot.h"
 #include "DestinationReachedBehaviour.h"
+#include <iostream>
 
 using namespace std;
 
@@ -13,6 +14,9 @@ Simulation::Simulation(const string &fileName)
     /* Initialize and set the robot. */
     robot = new Robot();
     map->setRobot(robot);
+
+    Cell *position = robot->getCurrentPosition();
+    cout << "Robot is at :" << position->getX() << "," << position->getY();
 }
 
 Simulation::~Simulation()
@@ -23,12 +27,12 @@ Simulation::~Simulation()
 
 void Simulation::run()
 {
-    DestinationReachedBehaviour destinationReachedBehaviour;
-    map->registerListener(&destinationReachedBehaviour);
-    robot->registerBehaviour(&destinationReachedBehaviour);
     //initialiseer Behaviours en EventListeners
+    DestinationReachedBehaviour destinationReachedBehaviour;
 
     //registreer Behaviours en EventListeners
+    map->registerListener(&destinationReachedBehaviour);
+    robot->registerBehaviour(&destinationReachedBehaviour);
 
     /* start Subsumption */
     /* while(!robot->isDestinationReached()) {

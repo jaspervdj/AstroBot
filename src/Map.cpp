@@ -80,6 +80,7 @@ Map::~Map()
 void Map::setRobot(Robot *r)
 {
     robot = r;
+    r->setCurrentPosition(origin);
 }
 
 void Map::registerListener(EventListener *listener)
@@ -98,6 +99,14 @@ void Map::refresh()
 int Map::getKey(Cell *cell) const
 {
     return cell->getY() * width + cell->getX();
+}
+
+void Map::move()
+{
+}
+
+void Map::jump()
+{
 }
 
 /** Function to create initial obstacle factories. */

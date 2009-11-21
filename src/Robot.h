@@ -2,6 +2,7 @@
 #define ROBOT_H
 
 #include "Orientation.h"
+#include "Cell.h"
 #include <list>
 
 class Behaviour;
@@ -57,6 +58,23 @@ class Robot
         void setOrientation(Orientation orientation);
 
         /**
+         * Get the current position.
+         */
+        Cell *getCurrentPosition();
+
+         /**
+         * Set the new position of the robot
+         * @param position The new position
+         */
+        void setCurrentPosition(Cell *cell);
+
+        /**
+         * Add the last move that was performed by the robot
+         * @param cell The new position
+         */
+        void addNextMove(Cell cell);
+
+        /**
          * Add a behaviour for this robot.
          * @param behaviour Behaviour to add.
          */
@@ -77,6 +95,12 @@ class Robot
 
         /** Orientation of the robot. */
         Orientation orientation;
+
+        /** Position of the robot. */
+        Cell position;
+
+        /** List with the taken path */
+        std::list<Cell*> path;
 
         /** List with the robot's behaviours. */
         std::list<Behaviour*> behaviours;

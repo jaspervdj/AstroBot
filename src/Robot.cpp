@@ -1,5 +1,6 @@
 #include "Robot.h"
 #include "Orientation.h"
+#include "Cell.h"
 #include "Behaviour.h"
 
 using namespace std;
@@ -43,6 +44,22 @@ Orientation Robot::getOrientation() const
 void Robot::setOrientation(Orientation orientation)
 {
     this->orientation = orientation;
+}
+
+Cell *Robot::getCurrentPosition()
+{
+    return &position;
+}
+
+void Robot::setCurrentPosition(Cell *position)
+{
+    this->position = *position;
+}
+
+void Robot::addNextMove(Cell cell)
+{
+    path.push_back(&cell);
+    setCurrentPosition(&cell);
 }
 
 void Robot::registerBehaviour(Behaviour *behaviour)

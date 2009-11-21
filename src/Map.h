@@ -42,6 +42,16 @@ class Map
          */
         void refresh();
 
+        /**
+         * Move the robot forward
+         */
+        void move();
+
+        /**
+         * Makes the robot jump (over an obstacle)
+         */
+        void jump();
+
     protected:
         /**
          * Get the key for a certain cell.
