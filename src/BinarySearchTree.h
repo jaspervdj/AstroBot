@@ -41,6 +41,13 @@ class BinarySearchTree
          */
         T *get(const K &key);
 
+        /**
+         * Get all values from the tree.
+         * @param arraySize Will contain the size of the returned array.
+         * @return All values from the tree.
+         */
+        T *getAllValues(int &arraySize) const;
+
     protected:
         /**
          * An element in the tree.
@@ -107,9 +114,20 @@ class BinarySearchTree
          */
         void setRoot(TreeElement *node);
 
+        /**
+         * Used to recursively obtain all values in the tree.
+         * @param array To put the elements in.
+         * @param position Current position in the array.
+         * @param node Current position the the tree.
+         */
+        void getAllValues(T *array, int &position, TreeElement *node) const;
+
     private:
         /** Root of the tree. */
         TreeElement *root;
+
+        /** Size of the tree. */
+        int size;
 };
 
 #endif

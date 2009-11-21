@@ -4,6 +4,7 @@ template<class K, class T>
 BinarySearchTree<K, T>::BinarySearchTree()
 {
     setRoot(NULL);
+    size = 0;
 }
 
 template<class K, class T>
@@ -31,6 +32,8 @@ void BinarySearchTree<K, T>::put(const K &key, const T &value)
         } else {
             setRoot(node);
         }
+
+        size++;
     }
 
     splay(node);
@@ -55,6 +58,21 @@ T *BinarySearchTree<K, T>::get(const K &key)
         return &node->value;
     } else {
         return NULL;
+    }
+}
+
+template<class K, class T>
+T *BinarySearchTree<K, T>::getAllValues(int &arraySize) const
+{
+    if(root == NULL) {
+        arraySize = 0;
+        return 0;
+    } else {
+        arraySize = size;
+        T *array = new T[size];
+        int position = 0;
+        getAllValues(array, position, root);
+        return array;
     }
 }
 
@@ -90,14 +108,13 @@ void BinarySearchTree<K, T>::TreeElement::setRight(
 }
 
 template<class K, class T>
-typename BinarySearchTree<K, T>::TreeElement *BinarySearchTree<K, T>::find(const K &key,
+typename BinarySearchTree<K, T>::TreeElement *BinarySearchTree<K, T>::find(
+        const K &key,
         typename BinarySearchTree::TreeElement **parent)
 {
     /* Current search position in the tree. */
     *parent = NULL;
     TreeElement *node = root;
-
-    /* Search the tree. */
     while(node && key != node->key) {
         *parent = node;
         if(key < node->key) node = node->left;
@@ -197,4 +214,18 @@ void BinarySearchTree<K, T>::setRoot(
 {
     this->root = root;
     if(root) root->parent = NULL;
+}
+
+template<class K, class T>
+void BinarySearchTree<K, T>::getAllValues(T *array, int &position,
+        typename BinarySearchTree<K, T>::TreeElement *node) const
+{
+    if(node->left)
+        getAllValues(array, position, node->left);
+
+    array[position] = node->value;
+    position++;
+
+    if(node->right)
+        getAllValues(array, position, node->right);
 }
