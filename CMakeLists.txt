@@ -12,6 +12,8 @@ ADD_EXECUTABLE(
     src/DestinationEvent.h
     src/DestinationEventListener.cpp
     src/DestinationEventListener.h
+	src/DestinationReachedBehaviour.cpp
+    src/DestinationReachedBehaviour.h
     src/Event.cpp
     src/Event.h
     src/EventListener.cpp
