@@ -9,6 +9,12 @@ class Cell
          * Constructor.
          */
         Cell(int x = 0, int y = 0);
+
+        /**
+         * Copy constructor.
+         * @param cell Cell to copy.
+         */
+        Cell(const Cell &cell);
         
         /**
          * Destructor.

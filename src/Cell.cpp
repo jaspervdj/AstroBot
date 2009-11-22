@@ -6,6 +6,12 @@ Cell::Cell(int x, int y)
     this->y = y;
 }
 
+Cell::Cell(const Cell &cell)
+{
+    this->x = cell.x;
+    this->y = cell.y;
+}
+
 Cell::~Cell()
 {
 }

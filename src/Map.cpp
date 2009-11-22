@@ -77,10 +77,10 @@ Map::~Map()
     delete[] allObstacles;
 }
 
-void Map::setRobot(Robot *r)
+void Map::setRobot(Robot *robot)
 {
-    robot = r;
-    r->setCurrentPosition(origin);
+    this->robot = robot;
+    robot->addNextMove(*origin);
 }
 
 void Map::registerListener(EventListener *listener)

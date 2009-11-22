@@ -62,17 +62,11 @@ class Robot
          */
         Cell *getCurrentPosition();
 
-         /**
-         * Set the new position of the robot
-         * @param position The new position
-         */
-        void setCurrentPosition(Cell *cell);
-
         /**
          * Add the last move that was performed by the robot
          * @param cell The new position
          */
-        void addNextMove(Cell cell);
+        void addNextMove(const Cell &cell);
 
         /**
          * Add a behaviour for this robot.
@@ -86,6 +80,13 @@ class Robot
          */
         Behaviour *getFirstActiveBehaviour();
 
+    protected:
+         /**
+         * Set the new position of the robot
+         * @param position The new position
+         */
+        void setCurrentPosition(Cell *cell);
+
     private:
         /** Has the robot reached it's destination? */
         bool destinationReached;
@@ -97,7 +98,7 @@ class Robot
         Orientation orientation;
 
         /** Position of the robot. */
-        Cell position;
+        Cell *position;
 
         /** List with the taken path */
         std::list<Cell*> path;

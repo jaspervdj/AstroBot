@@ -14,6 +14,9 @@ Robot::Robot()
 
 Robot::~Robot()
 {
+    /* Clear path. */
+    for(std::list<Cell*>::iterator i = path.begin(); i != path.end(); i++)
+        delete *i;
 }
 
 bool Robot::isDestinationReached() const
@@ -48,18 +51,14 @@ void Robot::setOrientation(Orientation orientation)
 
 Cell *Robot::getCurrentPosition()
 {
-    return &position;
+    return position;
 }
 
-void Robot::setCurrentPosition(Cell *position)
+void Robot::addNextMove(const Cell &cell)
 {
-    this->position = *position;
-}
-
-void Robot::addNextMove(Cell cell)
-{
-    path.push_back(&cell);
-    setCurrentPosition(&cell);
+    Cell *newCell = new Cell(cell);
+    path.push_back(newCell);
+    setCurrentPosition(newCell);
 }
 
 void Robot::registerBehaviour(Behaviour *behaviour)
@@ -77,4 +76,9 @@ Behaviour *Robot::getFirstActiveBehaviour()
     }
 
     return *behaviour;
+}
+
+void Robot::setCurrentPosition(Cell *position)
+{
+    this->position = position;
 }
