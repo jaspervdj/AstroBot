@@ -49,6 +49,47 @@ bool BinarySearchTree<K, T>::contains(const K &key)
 }
 
 template<class K, class T>
+void BinarySearchTree<K, T>::remove(const K &key)
+{
+    TreeElement *parent;
+    TreeElement *node = find(key, &parent);
+
+    /* Cannot remove a non-existant node. */
+    if(!node) return;
+
+    /* Copy the key/value from lower node, then continue with the lower node. */
+    if(node->right && node->left) {
+        TreeElement *originalNode = node;
+
+        parent = node;
+        node = node->right;
+        while(node->left) {
+            parent = node;
+            node = node->left;
+        }
+
+        originalNode->key = node->key;
+        originalNode->value = node->value;
+    }
+
+    /* Keep original left and right, then remove them from the node so they
+     * will not be deleted when we delete the node. */
+    TreeElement *left = node->left, *right = node->right;
+    node->setLeft(NULL);
+    node->setRight(NULL);
+    delete node;
+
+    /* Get the element that could be not null and set it. */
+    TreeElement *maybeNotNull = !left ? right : left;
+    if(!parent) root = maybeNotNull;
+    else if(parent->left == node) parent->setLeft(maybeNotNull);
+    else parent->setRight(maybeNotNull);
+    
+    /* One element less in the tree. */
+    size--;
+}
+
+template<class K, class T>
 T *BinarySearchTree<K, T>::get(const K &key)
 {
     TreeElement *parent;

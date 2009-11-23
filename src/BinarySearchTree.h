@@ -35,6 +35,12 @@ class BinarySearchTree
         bool contains(const K &key);
 
         /**
+         * Remove an element from the tree.
+         * @param key Key to remove.
+         */
+        void remove(const K &key);
+
+        /**
          * Get a certain value from the tree.
          * @param key Key to check.
          * @return Pointer to value of the associated key. NULL if not found.
