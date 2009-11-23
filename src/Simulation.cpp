@@ -14,9 +14,6 @@ Simulation::Simulation(const string &fileName)
     /* Initialize and set the robot. */
     robot = new Robot();
     map->setRobot(robot);
-
-    Cell *position = robot->getCurrentPosition();
-    cout << "Robot is at :" << position->getX() << "," << position->getY();
 }
 
 Simulation::~Simulation()
