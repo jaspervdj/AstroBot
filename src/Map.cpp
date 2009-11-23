@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
+#include <sstream>
 #include <exception>
 
 #include "Map.h"
@@ -10,6 +11,7 @@
 #include "TObstacleFactory.h"
 #include "Robot.h"
 #include "GUI.h"
+#include "ThickWall.h"
 
 using namespace std;
 
@@ -19,7 +21,9 @@ Map::Map(const string &fileName)
     origin = destination = NULL;
 
     /* Open the file. */
-    ifstream file(fileName.c_str(), ios_base::in);
+    stringstream path;
+    path << MAP_DIR << "/" << fileName;
+    ifstream file(path.str().c_str(), ios_base::in);
 
     /* Read through file. */
     while(file.good()) {
@@ -91,8 +95,12 @@ void Map::registerListener(EventListener *listener)
 
 void Map::refresh()
 {
-    Cell* cell = robot->getCurrentPosition();
-    Obstacle** obstacle = obstacles.get(getKey(cell));
+    Cell* current = robot->getCurrentPosition();
+    Cell next = getNextCell(current);
+    
+    Obstacle** obstacle;
+    if(*current == next) *obstacle = new ThickWall(next.getX(), next.getY());
+    else obstacle = obstacles.get(getKey(&next));
     
     ObstacleEvent obstacleEvent(obstacle ? *obstacle : NULL);
     
@@ -104,7 +112,7 @@ void Map::refresh()
             dynamic_cast<ObstacleEventListener*>(listener);
         if(!obstacleListener) continue;
             
-        if(obstacle) obstacleListener->noObstacle();
+        if(!obstacle) obstacleListener->noObstacle();
         else obstacleListener->obstacleDetected(obstacleEvent);
     }
 }
@@ -155,6 +163,8 @@ void Map::jump()
     GUI::show(GUI::JUMP);
     robot->addNextMove(destination);
 }
+
+const string Map::MAP_DIR = "./maps";
 
 /** Function to create initial obstacle factories. */
 BinarySearchTree<string, ObstacleFactory*> *createObstacleFactories()

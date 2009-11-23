@@ -14,7 +14,7 @@ class Obstacle;
 /** Representation of the map/environment */
 class Map
 {
-    public:
+    public:    
         /**
          * Constructor.
          * @param fileName File to load the map from.
@@ -72,7 +72,10 @@ class Map
          */
         int getKey(Cell *cell) const;
     
-    private:
+    private: 
+        /** Map file base dir */
+        static const std::string MAP_DIR;
+        
         /** Map dimensions **/
         int width, height;
     

@@ -20,6 +20,9 @@ class MoveBehaviour: public Behaviour,
          * Destructor.
          */
         virtual ~MoveBehaviour();
+        
+        /* Implementation. */
+        bool isActive();
 
         /* Implementation. */
         void action();
