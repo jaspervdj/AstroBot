@@ -26,7 +26,7 @@ Map *Behaviour::getMap() const
     return map;
 }
 
-void Behaviour::setMap(Map *robot)
+void Behaviour::setMap(Map *map)
 {
     this->map = map;
 }

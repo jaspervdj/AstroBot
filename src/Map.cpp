@@ -119,6 +119,8 @@ void Map::refresh()
     } else {
         fireNoObstacle();
     }
+
+    if(deleteObstacle) delete obstacle;
 }
 
 int Map::getKey(Cell *cell) const
