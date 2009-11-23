@@ -2,7 +2,7 @@
 #define MAP_H
 
 #include "BinarySearchTree.h"
-#include <list>
+#include "EventProducer.h"
 #include <string>
 
 class Cell;
@@ -12,7 +12,7 @@ class ObstacleFactory;
 class Obstacle;
 
 /** Representation of the map/environment */
-class Map
+class Map: public EventProducer
 {
     public:    
         /**
@@ -39,12 +39,6 @@ class Map
         void setRobot(Robot *robot);
 
         /**
-         * Add an eventlistener.
-         * @param listener EventListener to add.
-         */
-        void registerListener(EventListener *listener);
-
-        /**
          * Notify EventListeners of pending events.
          */
         void refresh();
@@ -53,7 +47,14 @@ class Map
          * Get next position
          * @param current  Current cell
          */
-        Cell getNextCell(Cell *current);
+        Cell getNextCell(Cell *current) const;
+
+        /**
+         * Check if a cell falls within the map range.
+         * @param cell Cell to check.
+         * @return If the cell falls within the map range.
+         */
+        bool isInRange(Cell *cell) const;
 
         /**
          * Move the robot forward
@@ -87,9 +88,6 @@ class Map
         
         /** Robot */
         Robot *robot;
-    
-        /** EventListeners */
-        std::list<EventListener*> listeners;
 
         /** Obstacles in the map. */
         BinarySearchTree<int, Obstacle*> obstacles;

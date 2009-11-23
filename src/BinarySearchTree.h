@@ -45,7 +45,7 @@ class BinarySearchTree
          * @param key Key to check.
          * @return Pointer to value of the associated key. NULL if not found.
          */
-        T *get(const K &key);
+        T get(const K &key);
 
         /**
          * Get all values from the tree.

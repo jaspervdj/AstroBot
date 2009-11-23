@@ -1,4 +1,7 @@
 #include "BinarySearchTree.h"
+#include <exception>
+
+using namespace std;
 
 template<class K, class T>
 BinarySearchTree<K, T>::BinarySearchTree()
@@ -90,15 +93,23 @@ void BinarySearchTree<K, T>::remove(const K &key)
 }
 
 template<class K, class T>
-T *BinarySearchTree<K, T>::get(const K &key)
+T BinarySearchTree<K, T>::get(const K &key)
 {
     TreeElement *parent;
     TreeElement *node = find(key, &parent);
     splay(node);
     if(node != NULL) {
-        return &node->value;
+        return node->value;
     } else {
-        return NULL;
+        class ElementNotFoundException: public exception
+        {
+            char *what()
+            {
+                return "Element not found.";
+            }
+        };
+
+        throw ElementNotFoundException();
     }
 }
 

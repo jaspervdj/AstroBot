@@ -8,6 +8,7 @@
 #include "Cell.h"
 #include "Obstacle.h"
 #include "ObstacleEventListener.h"
+#include "DestinationEventListener.h"
 #include "TObstacleFactory.h"
 #include "Robot.h"
 #include "GUI.h"
@@ -48,12 +49,12 @@ Map::Map(const string &fileName)
             /* Check the type of the obstacle. */
             string type;
             file >> type;
-            ObstacleFactory **factory = factories->get(type);
             /* Factory found, let it create an object. */
-            if(factory) {
+            if(factories->contains(type)) {
+                ObstacleFactory *factory = factories->get(type);
                 int x, y;
                 file >> x >> y;
-                Obstacle *obstacle = (*factory)->createObstacle(x, y);
+                Obstacle *obstacle = factory->createObstacle(x, y);
                 obstacles.put(getKey(obstacle), obstacle);
             /* No such obstacle. */
             } else {
@@ -88,32 +89,35 @@ void Map::setRobot(Robot *robot)
     robot->addNextMove(*origin);
 }
 
-void Map::registerListener(EventListener *listener)
-{
-    listeners.push_back(listener);
-}
-
 void Map::refresh()
 {
     Cell* current = robot->getCurrentPosition();
     Cell next = getNextCell(current);
     
-    Obstacle** obstacle;
-    if(*current == next) *obstacle = new ThickWall(next.getX(), next.getY());
-    else obstacle = obstacles.get(getKey(&next));
-    
-    ObstacleEvent obstacleEvent(obstacle ? *obstacle : NULL);
-    
-    for(list<EventListener*>::iterator i = listeners.begin();
-            i != listeners.end(); i++) {
-        EventListener *listener = *i;
-        
-        ObstacleEventListener *obstacleListener = 
-            dynamic_cast<ObstacleEventListener*>(listener);
-        if(!obstacleListener) continue;
-            
-        if(!obstacle) obstacleListener->noObstacle();
-        else obstacleListener->obstacleDetected(obstacleEvent);
+    if(*current == *destination) {
+        DestinationEvent event(current);
+        fireDestinationReached(event);
+    }
+
+    Obstacle *obstacle = NULL;
+    bool deleteObstacle = false;
+    int key = getKey(&next);
+
+    if(obstacles.contains(key)) {
+        obstacle = obstacles.get(key);
+    /* Not in range, create a virtual obstacle. */
+    } else if(!isInRange(&next)) {
+        obstacle = new ThickWall(next.getX(), next.getY());
+        deleteObstacle = true;
+    }
+
+    /* Found obstacle, we're going to need some events. */
+    if(obstacle) {
+        ObstacleEvent event(obstacle);
+        fireObstacleDetected(obstacle);
+    /* No obstacle, fire some events as well. */
+    } else {
+        fireNoObstacle();
     }
 }
 
@@ -122,7 +126,7 @@ int Map::getKey(Cell *cell) const
     return cell->getY() * width + cell->getX();
 }
 
-Cell Map::getNextCell(Cell *current)
+Cell Map::getNextCell(Cell *current) const
 {
     int x = current->getX();
     int y = current->getY();
@@ -133,16 +137,21 @@ Cell Map::getNextCell(Cell *current)
     else if(orientation == SOUTH) y += robot->getSpeed();
     else if(orientation == WEST) x -= robot->getSpeed();
     
-    if(x < 0 || x >= width) x = current->getX();
-    if(y < 0 || y >= height) y = current->getY();
-    
     return Cell(x, y);
+}
+
+bool Map::isInRange(Cell *cell) const
+{
+    return cell->getX() >= 0 && cell->getX() < width &&
+            cell->getY() >= 0 && cell->getY() < height;
 }
 
 void Map::move()
 {
     Cell next = getNextCell(robot->getCurrentPosition());
-    if(obstacles.contains(getKey(&next))) return;
+    /* Deny move if there is an obstacle or it moves the robot out of the map.
+     */
+    if(obstacles.contains(getKey(&next)) || !isInRange(&next)) return;
     
     GUI::show(GUI::MOVE);
     robot->addNextMove(next);
@@ -151,14 +160,15 @@ void Map::move()
 void Map::jump()
 {
     Cell next = getNextCell(robot->getCurrentPosition());
-    Obstacle **obstacle = obstacles.get(getKey(&next));
     
-    // don't jump if there's an obstacle which isn't jumpable
-    if(obstacle && !(*obstacle)->isJumpable()) return;
+    /* Don't jump if there's an obstacle which isn't jumpable */
+    int key = getKey(&next);
+    if(obstacles.contains(key) && !obstacles.get(key)->isJumpable()) return;
     
-    // can only land on a cell where there's no obstacle
+    /* Can only land on a cell where there's no obstacle and the cell is
+     * within the map. */
     Cell destination = getNextCell(&next);
-    if(obstacles.contains(getKey(&destination))) return;
+    if(obstacles.contains(getKey(&destination)) || !isInRange(&next)) return;
     
     GUI::show(GUI::JUMP);
     robot->addNextMove(destination);
