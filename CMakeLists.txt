@@ -23,6 +23,8 @@ ADD_EXECUTABLE(
     src/Main.cpp
     src/Map.cpp
     src/Map.h
+    src/MoveBehaviour.cpp
+    src/MoveBehaviour.h
     src/Obstacle.cpp
     src/Obstacle.h
     src/ObstacleEvent.cpp

@@ -5,10 +5,10 @@
 
 using namespace std;
 
-void GUI::initialize(const string & file_name)
+void GUI::initialize(const string & fileName)
 {
     stringstream cmds;
-    cmds << "java Show " << PORT_NR << " LOAD " << file_name << endl;
+    cmds << "java Show " << PORT_NR << " LOAD " << fileName << endl;
     system(cmds.str().c_str());
 }
 
