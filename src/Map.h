@@ -27,9 +27,16 @@ class Map
         ~Map();
 
         /**
-         * Assign robot instance
+         * Get the robot in the map.
+         * @return The robot in the map.
          */
-        void setRobot(Robot *r);
+        Robot *getRobot() const;
+
+        /**
+         * Assign robot instance
+         * @param robot Robot to set.
+         */
+        void setRobot(Robot *robot);
 
         /**
          * Add an eventlistener.

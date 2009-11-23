@@ -1,7 +1,7 @@
 #ifndef BEHAVIOUR_H
 #define BEHAVIOUR_H
 
-class Robot;
+class Map;
 
 /** Abstract class defining a certain Robot behaviour. */
 class Behaviour
@@ -29,20 +29,20 @@ class Behaviour
         virtual void action() = 0;
 
         /**
-         * Get the controlled robot.
-         * @return The robot this behaviour belongs to.
+         * Get the map for the robot.
+         * @return The map this robot is on.
          */
-        Robot *getRobot() const; 
+        Map *getMap() const;
 
         /**
-         * Set the robot to which this behaviour belongs.
-         * @param robot Robot to control.
+         * Set the map the robot is on.
+         * @param map Map the robot is on.
          */
-        void setRobot(Robot *robot);
+        void setMap(Map *map);
 
     private:
-        /** Robot this behaviour controls. */
-        Robot *robot;
+        /** Map the robot is on. */
+        Map *map;
 };
 
 #endif

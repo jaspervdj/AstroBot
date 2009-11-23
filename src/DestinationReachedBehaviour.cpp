@@ -1,4 +1,5 @@
 #include "DestinationReachedBehaviour.h"
+#include "Map.h"
 #include "Robot.h"
 
 DestinationReachedBehaviour::DestinationReachedBehaviour()
@@ -17,7 +18,7 @@ bool DestinationReachedBehaviour::isActive()
 
 void DestinationReachedBehaviour::action()
 {
-    getRobot()->setDestinationReached(true);
+    getMap()->getRobot()->setDestinationReached(true);
 }
 
 void DestinationReachedBehaviour::destinationReached(

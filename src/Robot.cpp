@@ -64,7 +64,6 @@ void Robot::addNextMove(const Cell &cell)
 void Robot::registerBehaviour(Behaviour *behaviour)
 {
     behaviours.push_back(behaviour);
-    behaviour->setRobot(this);
 }
 
 Behaviour *Robot::getFirstActiveBehaviour()

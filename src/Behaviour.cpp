@@ -1,21 +1,21 @@
 #include "Behaviour.h"
-#include "Robot.h"
+#include "Map.h"
 
 Behaviour::Behaviour()
 {
-    robot = NULL;
+    map = NULL;
 }
 
 Behaviour::~Behaviour()
 {
 }
 
-Robot *Behaviour::getRobot() const
+Map *Behaviour::getMap() const
 {
-    return robot;
+    return map;
 }
 
-void Behaviour::setRobot(Robot *robot)
+void Behaviour::setMap(Map *robot)
 {
-    this->robot = robot;
+    this->map = map;
 }
