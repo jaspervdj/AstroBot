@@ -74,7 +74,7 @@ Behaviour *Robot::getFirstActiveBehaviour()
         behaviour++;
     }
 
-    return *behaviour;
+    return behaviour != behaviours.end() ? *behaviour : NULL;
 }
 
 void Robot::setCurrentPosition(Cell *position)

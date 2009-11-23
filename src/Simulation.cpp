@@ -6,6 +6,8 @@
 #include "TurnBehaviour.h"
 #include "DestinationReachedBehaviour.h"
 
+#include <iostream>
+
 using namespace std;
 
 Simulation::Simulation(const string &fileName)
@@ -28,11 +30,15 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     // initialiseer Behaviours en EventListeners
+    DestinationReachedBehaviour destinationReachedBehaviour;
     MoveBehaviour moveBehaviour;
     TurnBehaviour turnBehaviour;
-    DestinationReachedBehaviour destinationReachedBehaviour;
 
     // registreer Behaviours en EventListeners
+    destinationReachedBehaviour.setMap(map);
+    map->registerListener(&destinationReachedBehaviour);
+    robot->registerBehaviour(&destinationReachedBehaviour);
+
     moveBehaviour.setMap(map);
     map->registerListener(&moveBehaviour);
     robot->registerBehaviour(&moveBehaviour);
@@ -40,15 +46,14 @@ void Simulation::run()
     turnBehaviour.setMap(map);
     map->registerListener(&turnBehaviour);
     robot->registerBehaviour(&turnBehaviour);
-    
-    destinationReachedBehaviour.setMap(map);
-    map->registerListener(&destinationReachedBehaviour);
-    robot->registerBehaviour(&destinationReachedBehaviour);
 
     // start Subsumption
     while(!robot->isDestinationReached()) {
         map->refresh();
         Behaviour *behaviour = robot->getFirstActiveBehaviour();
-        behaviour->action();
+        if(!behaviour)
+            cerr << "No active behaviour!" << endl;
+        else
+            behaviour->action();
     }
 }
