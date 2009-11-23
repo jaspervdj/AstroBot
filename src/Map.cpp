@@ -91,9 +91,21 @@ void Map::registerListener(EventListener *listener)
 
 void Map::refresh()
 {
+    Cell* cell = robot->getCurrentPosition();
+    Obstacle** obstacle = obstacles.get(getKey(cell));
+    
+    ObstacleEvent obstacleEvent(obstacle ? *obstacle : NULL);
+    
     for(list<EventListener*>::iterator i = listeners.begin();
             i != listeners.end(); i++) {
         EventListener *listener = *i;
+        
+        ObstacleEventListener *obstacleListener = 
+            dynamic_cast<ObstacleEventListener*>(listener);
+        if(!obstacleListener) continue;
+            
+        if(obstacle) obstacleListener->noObstacle();
+        else obstacleListener->obstacleDetected(obstacleEvent);
     }
 }
 

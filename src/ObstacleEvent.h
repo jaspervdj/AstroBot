@@ -3,18 +3,29 @@
 
 #include "Event.h"
 
+class Obstacle;
+
 class ObstacleEvent: public Event
 {
     public:
         /**
          * Constructor.
          */
-        ObstacleEvent();
+        ObstacleEvent(Obstacle* obstacle);
 
         /**
          * Destructor.
          */
         ~ObstacleEvent();
+        
+        /**
+         * Get obstacle we're currently looking at
+         */
+        Obstacle* getObstacle();
+        
+    private:
+        /** Obstacle */
+        Obstacle* obstacle;
 };
 
 #endif
