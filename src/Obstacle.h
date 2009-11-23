@@ -27,7 +27,7 @@ class Obstacle : public Cell
          * Shootable?
          * @return ok
          */
-         virtual bool isShootable() const = 0;
+        virtual bool isShootable() const = 0;
 };
 
 #endif

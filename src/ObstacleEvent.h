@@ -21,11 +21,11 @@ class ObstacleEvent: public Event
         /**
          * Get obstacle we're currently looking at
          */
-        Obstacle* getObstacle();
+        Obstacle *getObstacle() const;
         
     private:
         /** Obstacle */
-        Obstacle* obstacle;
+        Obstacle *obstacle;
 };
 
 #endif

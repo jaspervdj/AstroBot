@@ -9,7 +9,7 @@ ObstacleEvent::~ObstacleEvent()
 {
 }
 
-Obstacle *ObstacleEvent::getObstacle()
+Obstacle *ObstacleEvent::getObstacle() const
 {
     return obstacle;
 }
