@@ -4,16 +4,10 @@
 
 DestinationReachedBehaviour::DestinationReachedBehaviour()
 {
-    reached = false;
 }
 
 DestinationReachedBehaviour::~DestinationReachedBehaviour()
 {
-}
-
-bool DestinationReachedBehaviour::isActive()
-{
-    return reached;
 }
 
 void DestinationReachedBehaviour::action()
@@ -24,5 +18,5 @@ void DestinationReachedBehaviour::action()
 void DestinationReachedBehaviour::destinationReached(
         const DestinationEvent &event)
 {
-    reached = true;
+    setActive(true);
 }

@@ -48,6 +48,12 @@ class Map
          * Notify EventListeners of pending events.
          */
         void refresh();
+        
+        /**
+         * Get next position
+         * @param current  Current cell
+         */
+        Cell getNextCell(Cell *current);
 
         /**
          * Move the robot forward

@@ -21,7 +21,7 @@ class Behaviour
          * Check if this Robot behaviour wants focus.
          * @return If this robot behaviour wants focus.
          */
-        virtual bool isActive() = 0;
+        virtual bool isActive();
 
         /**
          * Execute the behaviour action.
@@ -39,10 +39,19 @@ class Behaviour
          * @param map Map the robot is on.
          */
         void setMap(Map *map);
+        
+    protected:
+        /**
+         * Mark the current behaviour as active
+         */
+        void setActive(bool active);
 
     private:
         /** Map the robot is on. */
         Map *map;
+
+        /** Flag to see if this behaviour is active. */
+        bool active;
 };
 
 #endif

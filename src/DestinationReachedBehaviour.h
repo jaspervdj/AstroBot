@@ -22,17 +22,10 @@ class DestinationReachedBehaviour: public Behaviour,
         virtual ~DestinationReachedBehaviour();
 
         /* Implementation. */
-        bool isActive();
-
-        /* Implementation. */
         void action();
 
         /* Implementation. */
         void destinationReached(const DestinationEvent &event);
-
-    private:
-        /** Flag to see if we reached the destination. */
-        bool reached;
 };
 
 #endif

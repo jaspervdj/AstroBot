@@ -9,6 +9,7 @@
 #include "ObstacleEventListener.h"
 #include "TObstacleFactory.h"
 #include "Robot.h"
+#include "GUI.h"
 
 using namespace std;
 
@@ -31,29 +32,24 @@ Map::Map(const string &fileName)
         if(command == "origin") {
             file >> x >> y;
             origin = new Cell(x, y);
-            cout << "Origin (" << x << ", " << y << ");" << endl;
         /* Set destination. */
         } else if(command == "destination") {
             file >> x >> y;
             destination = new Cell(x, y);
-            cout << "Destination (" << x << ", " << y << ");" << endl;
         /* Set dimensions. */
         } else if(command == "dimension") {
             file >> width >> height;
-            cout << "Dimension (" << width << ", " << height << ");" << endl;
         /* Obstacle. */
         } else if(command == "obstacle") {
             /* Check the type of the obstacle. */
             string type;
             file >> type;
             ObstacleFactory **factory = factories->get(type);
-            /* Factroy found, let it create an object. */
+            /* Factory found, let it create an object. */
             if(factory) {
                 int x, y;
                 file >> x >> y;
                 Obstacle *obstacle = (*factory)->createObstacle(x, y);
-                cout << "Created obstacle of type \"" << type << "\" at (" <<
-                        x << ", " << y << ");" << endl;
                 obstacles.put(getKey(obstacle), obstacle);
             /* No such obstacle. */
             } else {
@@ -106,12 +102,46 @@ int Map::getKey(Cell *cell) const
     return cell->getY() * width + cell->getX();
 }
 
+Cell Map::getNextCell(Cell *current)
+{
+    int x = current->getX();
+    int y = current->getY();
+    
+    Orientation orientation = robot->getOrientation();
+    if(orientation == NORTH) y -= robot->getSpeed();
+    else if(orientation == EAST) x += robot->getSpeed();
+    else if(orientation == SOUTH) y += robot->getSpeed();
+    else if(orientation == WEST) x -= robot->getSpeed();
+    
+    if(x < 0 || x >= width) x = current->getX();
+    if(y < 0 || y >= height) y = current->getY();
+    
+    return Cell(x, y);
+}
+
 void Map::move()
 {
+    Cell next = getNextCell(robot->getCurrentPosition());
+    if(obstacles.contains(getKey(&next))) return;
+    
+    GUI::show(GUI::MOVE);
+    robot->addNextMove(next);
 }
 
 void Map::jump()
 {
+    Cell next = getNextCell(robot->getCurrentPosition());
+    Obstacle **obstacle = obstacles.get(getKey(&next));
+    
+    // don't jump if there's an obstacle which isn't jumpable
+    if(obstacle && !(*obstacle)->isJumpable()) return;
+    
+    // can only land on a cell where there's no obstacle
+    Cell destination = getNextCell(&next);
+    if(obstacles.contains(getKey(&destination))) return;
+    
+    GUI::show(GUI::JUMP);
+    robot->addNextMove(destination);
 }
 
 /** Function to create initial obstacle factories. */
