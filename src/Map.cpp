@@ -98,8 +98,12 @@ void Map::refresh()
     Cell* current = robot->getCurrentPosition();
     Cell next = getNextCell(current);
     
-    Obstacle** obstacle;
-    if(*current == next) *obstacle = new ThickWall(next.getX(), next.getY());
+    Obstacle** obstacle = NULL;
+    if(*current == next)
+    {
+        Obstacle* border = new ThickWall(next.getX(), next.getY());
+        obstacle = &border;
+    }
     else obstacle = obstacles.get(getKey(&next));
     
     ObstacleEvent obstacleEvent(obstacle ? *obstacle : NULL);

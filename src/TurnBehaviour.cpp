@@ -3,6 +3,8 @@
 #include "Robot.h"
 #include "ObstacleEvent.h"
 #include "Obstacle.h"
+#include "Orientation.h"
+#include "GUI.h"
 
 #include <iostream>
 
@@ -37,5 +39,16 @@ bool TurnBehaviour::isActive()
 
 void TurnBehaviour::action()
 {
-    cout << "Woot, moving" << endl;
+    Orientation current = getMap()->getRobot()->getOrientation();
+
+    Orientation next;
+    if(current == NORTH) next = EAST;
+    else if(current == EAST) next = SOUTH;
+    else if(current == SOUTH) next = WEST;
+    else if(current == WEST) next = NORTH;
+
+    getMap()->getRobot()->setOrientation(next);
+    GUI::show(GUI::ROTATE);
+
+    cout << "Woot, turning" << endl;
 }

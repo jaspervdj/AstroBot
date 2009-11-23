@@ -34,5 +34,6 @@ bool MoveBehaviour::isActive()
 
 void MoveBehaviour::action()
 {
+    getMap()->move();
     cout << "Woot, moving" << endl;
 }
