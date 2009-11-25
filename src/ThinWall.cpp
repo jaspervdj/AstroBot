@@ -2,16 +2,10 @@
 
 ThinWall::ThinWall(int x, int y): Obstacle(x, y)
 {
-    shot = false;
 }
 
 ThinWall::~ThinWall()
 {
-}
-
-bool ThinWall::isAccessible() const
-{
-    return !shot;
 }
 
 bool ThinWall::isShootable() const

@@ -8,11 +8,6 @@ ThickWall::~ThickWall()
 {
 }
 
-bool ThickWall::isAccessible() const
-{
-    return false;
-}
-
 bool ThickWall::isShootable() const
 {
     return false;

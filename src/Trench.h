@@ -17,8 +17,6 @@ class Trench : public Obstacle
          */
         virtual ~Trench();
         
-        virtual bool isAccessible() const;
-        
         virtual bool isJumpable() const;
         
         virtual bool isShootable() const;

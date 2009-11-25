@@ -40,6 +40,8 @@ ADD_EXECUTABLE(
     src/Orientation.h
     src/Robot.cpp
     src/Robot.h
+    src/ShootBehaviour.cpp
+    src/ShootBehaviour.h
     src/Simulation.cpp
     src/Simulation.h
     src/TObstacleFactory.cpp

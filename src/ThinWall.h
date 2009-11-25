@@ -18,17 +18,10 @@ class ThinWall: public Obstacle
         virtual ~ThinWall();
         
         /* Implementation. */
-        virtual bool isAccessible() const;
-        
-        /* Implementation. */
         virtual bool isJumpable() const;
         
         /* Implementation. */
         virtual bool isShootable() const;
-
-    private:
-        /** Has the wal been shot? */
-        bool shot;
 };
 
 #endif

@@ -9,7 +9,12 @@ Obstacle::~Obstacle()
 {
 }
 
+bool Obstacle::isAccessible() const
+{
+    return accessible;
+}
+
 void Obstacle::shoot()
 {
-    accessible = !isShootable();
+    accessible = isShootable();
 }

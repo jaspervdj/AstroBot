@@ -18,9 +18,6 @@ class ThickWall: public Obstacle
         virtual ~ThickWall();
         
         /* Implementation. */
-        virtual bool isAccessible() const;
-        
-        /* Implementation. */
         virtual bool isJumpable() const;
         
         /* Implementation. */

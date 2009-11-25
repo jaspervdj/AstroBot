@@ -153,7 +153,9 @@ void Map::move()
     Cell next = getNextCell(robot->getCurrentPosition());
     /* Deny move if there is an obstacle or it moves the robot out of the map.
      */
-    if(obstacles.contains(getKey(&next)) || !isInRange(&next)) return;
+    int key = getKey(&next);
+    if((obstacles.contains(key) && !obstacles.get(key)->isAccessible()) ||
+            !isInRange(&next)) return;
     
     GUI::show(GUI::MOVE);
     robot->addNextMove(next);
@@ -170,7 +172,10 @@ void Map::jump()
     /* Can only land on a cell where there's no obstacle and the cell is
      * within the map. */
     Cell destination = getNextCell(&next);
-    if(obstacles.contains(getKey(&destination)) || !isInRange(&next)) return;
+    int destinationKey = getKey(&destination);
+    if((obstacles.contains(destinationKey) &&
+            !obstacles.get(destinationKey)->isAccessible()) ||
+            !isInRange(&next)) return;
     
     GUI::show(GUI::JUMP);
     robot->addNextMove(destination);

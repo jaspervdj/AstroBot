@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "Robot.h"
 #include "MoveBehaviour.h"
+#include "ShootBehaviour.h"
 #include "TurnBehaviour.h"
 #include "DestinationReachedBehaviour.h"
 
@@ -30,19 +31,24 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     // initialiseer Behaviours en EventListeners
-    DestinationReachedBehaviour destinationReachedBehaviour;
-    MoveBehaviour moveBehaviour;
-    TurnBehaviour turnBehaviour;
 
     // registreer Behaviours en EventListeners
+    DestinationReachedBehaviour destinationReachedBehaviour;
     destinationReachedBehaviour.setMap(map);
     map->registerListener(&destinationReachedBehaviour);
     robot->registerBehaviour(&destinationReachedBehaviour);
 
+    MoveBehaviour moveBehaviour;
     moveBehaviour.setMap(map);
     map->registerListener(&moveBehaviour);
     robot->registerBehaviour(&moveBehaviour);
+
+    ShootBehaviour shootBehaviour;
+    shootBehaviour.setMap(map);
+    map->registerListener(&shootBehaviour);
+    robot->registerBehaviour(&shootBehaviour);
     
+    TurnBehaviour turnBehaviour;
     turnBehaviour.setMap(map);
     map->registerListener(&turnBehaviour);
     robot->registerBehaviour(&turnBehaviour);

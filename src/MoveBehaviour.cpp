@@ -1,6 +1,7 @@
 #include "MoveBehaviour.h"
 #include "Map.h"
 #include "Robot.h"
+#include "Obstacle.h"
 
 #include <iostream>
 
@@ -17,7 +18,7 @@ MoveBehaviour::~MoveBehaviour()
 void MoveBehaviour::obstacleDetected(const ObstacleEvent &event)
 {
     cout << "MoveBehaviour: obstacle detected!" << endl;
-    setActive(false);
+    setActive(event.getObstacle()->isAccessible());
 }
 
 void MoveBehaviour::noObstacle()

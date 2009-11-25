@@ -8,11 +8,6 @@ Trench::~Trench()
 {
 }
 
-bool Trench::isAccessible() const
-{
-    return false;
-}
-
 bool Trench::isShootable() const
 {
     return false;

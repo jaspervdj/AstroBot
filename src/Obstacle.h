@@ -16,6 +16,12 @@ class Obstacle : public Cell
          * Destructor.
          */
         virtual ~Obstacle();
+
+        /**
+         * Is the cell accessible?
+         * @return If the cell is accessible.
+         */
+        virtual bool isAccessible() const;
         
         /**
          * Jumpable?
