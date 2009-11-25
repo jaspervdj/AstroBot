@@ -25,6 +25,10 @@ class ThinWall: public Obstacle
         
         /* Implementation. */
         virtual bool isShootable() const;
+
+    private:
+        /** Has the wal been shot? */
+        bool shot;
 };
 
 #endif

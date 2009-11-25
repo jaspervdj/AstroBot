@@ -28,6 +28,15 @@ class Obstacle : public Cell
          * @return ok
          */
         virtual bool isShootable() const = 0;
+
+        /**
+         * Shoot the obstacle.
+         */
+        virtual void shoot();
+
+    private:
+        /** If the obstacle is accessible. */
+        bool accessible;
 };
 
 #endif
