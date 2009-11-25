@@ -2,6 +2,7 @@
 #include "GUI.h"
 #include "Map.h"
 #include "Robot.h"
+#include "JumpBehaviour.h"
 #include "MoveBehaviour.h"
 #include "ShootBehaviour.h"
 #include "TurnBehaviour.h"
@@ -32,10 +33,11 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     /* Create behaviours. */
-    const int numberOfBehaviours = 4;
+    const int numberOfBehaviours = 5;
     Behaviour *behaviours[numberOfBehaviours] = {
         new DestinationReachedBehaviour(),
         new MoveBehaviour(),
+        new JumpBehaviour(),
         new ShootBehaviour(),
         new TurnBehaviour()
     };

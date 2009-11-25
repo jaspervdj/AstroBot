@@ -24,6 +24,8 @@ ADD_EXECUTABLE(
     src/EventProducer.h
     src/GUI.cpp
     src/GUI.h
+    src/JumpBehaviour.cpp
+    src/JumpBehaviour.h
     src/Main.cpp
     src/Map.cpp
     src/Map.h
