@@ -22,7 +22,7 @@ void TurnBehaviour::obstacleDetected(const ObstacleEvent &event)
 {
     const Obstacle *obstacle = event.getObstacle();
     cout << "TurnBehaviour: obstacle detected!" << endl;
-    setActive(!obstacle->isJumpable() && !obstacle->isShootable());
+    setActive(true);
 }
 
 void TurnBehaviour::noObstacle()
