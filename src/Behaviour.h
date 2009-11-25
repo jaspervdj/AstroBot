@@ -3,8 +3,10 @@
 
 class Map;
 
+#include "EventListener.h"
+
 /** Abstract class defining a certain Robot behaviour. */
-class Behaviour
+class Behaviour: public EventListener
 {
     public:
         /**

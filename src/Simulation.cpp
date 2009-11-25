@@ -8,6 +8,7 @@
 #include "DestinationReachedBehaviour.h"
 
 #include <iostream>
+#include <exception>
 
 using namespace std;
 
@@ -30,36 +31,43 @@ Simulation::~Simulation()
 
 void Simulation::run()
 {
-    // initialiseer Behaviours en EventListeners
+    /* Create behaviours. */
+    const int numberOfBehaviours = 4;
+    Behaviour *behaviours[numberOfBehaviours] = {
+        new DestinationReachedBehaviour(),
+        new MoveBehaviour(),
+        new ShootBehaviour(),
+        new TurnBehaviour()
+    };
 
-    // registreer Behaviours en EventListeners
-    DestinationReachedBehaviour destinationReachedBehaviour;
-    destinationReachedBehaviour.setMap(map);
-    map->registerListener(&destinationReachedBehaviour);
-    robot->registerBehaviour(&destinationReachedBehaviour);
+    /* Initialize behaviours. */
+    for(int i = 0; i < numberOfBehaviours; i++) {
+        behaviours[i]->setMap(map);
+        map->registerListener(behaviours[i]);
+        robot->registerBehaviour(behaviours[i]);
+    }
 
-    MoveBehaviour moveBehaviour;
-    moveBehaviour.setMap(map);
-    map->registerListener(&moveBehaviour);
-    robot->registerBehaviour(&moveBehaviour);
-
-    ShootBehaviour shootBehaviour;
-    shootBehaviour.setMap(map);
-    map->registerListener(&shootBehaviour);
-    robot->registerBehaviour(&shootBehaviour);
-    
-    TurnBehaviour turnBehaviour;
-    turnBehaviour.setMap(map);
-    map->registerListener(&turnBehaviour);
-    robot->registerBehaviour(&turnBehaviour);
-
-    // start Subsumption
+    /* Run subsumption. */
     while(!robot->isDestinationReached()) {
         map->refresh();
         Behaviour *behaviour = robot->getFirstActiveBehaviour();
-        if(!behaviour)
-            cerr << "No active behaviour!" << endl;
-        else
+        if(behaviour) {
             behaviour->action();
+        } else {
+            class NoActiveBehaviourException: public exception
+            {
+                const char *what()
+                {
+                    return "No active behaviour found.";
+                }
+            };
+
+            throw NoActiveBehaviourException();
+        }
+    }
+
+    /* Free behaviours. */
+    for(int i = 0; i < numberOfBehaviours; i++) {
+        delete behaviours[i];
     }
 }
