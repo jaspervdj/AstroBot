@@ -20,9 +20,6 @@ class JumpBehaviour: public Behaviour,
          * Destructor.
          */
         virtual ~JumpBehaviour();
-        
-        /* Implementation. */
-        bool isActive();
 
         /* Implementation. */
         void action();

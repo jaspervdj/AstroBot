@@ -20,9 +20,6 @@ class TurnBehaviour: public Behaviour,
          * Destructor.
          */
         virtual ~TurnBehaviour();
-        
-        /* Implementation. */
-        bool isActive();
 
         /* Implementation. */
         void action();

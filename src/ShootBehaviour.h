@@ -22,9 +22,6 @@ class ShootBehaviour: public Behaviour,
         virtual ~ShootBehaviour();
         
         /* Implementation. */
-        bool isActive();
-
-        /* Implementation. */
         void action();
 
         /* Implementation. */
