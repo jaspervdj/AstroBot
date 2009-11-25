@@ -56,5 +56,7 @@ ADD_EXECUTABLE(
     src/Trench.h
     src/TurnBehaviour.cpp
     src/TurnBehaviour.h
+	src/TurnCCWBehaviour.cpp
+	src/TurnCCWBehaviour.h
     src/TemplateInstantiations.cpp
 )
