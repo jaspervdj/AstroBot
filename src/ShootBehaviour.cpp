@@ -30,6 +30,6 @@ void ShootBehaviour::noObstacle()
 
 void ShootBehaviour::action()
 {
-    if(lastShootableObstacle) lastShootableObstacle->shoot();
+    if(lastShootableObstacle) lastShootableObstacle->shootDown();
     GUI::show(GUI::SHOOT);
 }

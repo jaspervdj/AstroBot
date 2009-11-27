@@ -38,7 +38,7 @@ class Obstacle : public Cell
         /**
          * Shoot the obstacle.
          */
-        virtual void shoot();
+        virtual void shootDown();
 
     private:
         /** If the obstacle is accessible. */

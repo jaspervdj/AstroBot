@@ -14,7 +14,7 @@ bool Obstacle::isAccessible() const
     return accessible;
 }
 
-void Obstacle::shoot()
+void Obstacle::shootDown()
 {
     accessible = isShootable();
 }
