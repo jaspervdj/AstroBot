@@ -6,6 +6,7 @@
 #include "MoveBehaviour.h"
 #include "ShootBehaviour.h"
 #include "TurnBehaviour.h"
+#include "TurnCCWBehaviour.h"
 #include "DestinationReachedBehaviour.h"
 
 #include <iostream>
@@ -33,12 +34,13 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     /* Create behaviours. */
-    const int numberOfBehaviours = 5;
+    const int numberOfBehaviours = 6;
     Behaviour *behaviours[numberOfBehaviours] = {
         new DestinationReachedBehaviour(),
         new MoveBehaviour(),
         new JumpBehaviour(),
         new ShootBehaviour(),
+        new TurnCCWBehaviour(),
         new TurnBehaviour()
     };
 

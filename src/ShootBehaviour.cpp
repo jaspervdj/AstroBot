@@ -1,4 +1,5 @@
 #include "ShootBehaviour.h"
+#include "Map.h"
 #include "Robot.h"
 #include "Obstacle.h"
 #include "GUI.h"
@@ -32,4 +33,6 @@ void ShootBehaviour::action()
 {
     if(lastShootableObstacle) lastShootableObstacle->shootDown();
     GUI::show(GUI::SHOOT);
+    
+    getMap()->move();
 }

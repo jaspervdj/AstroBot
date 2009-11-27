@@ -142,6 +142,16 @@ Cell Map::getNextCell(Cell *current) const
     return Cell(x, y);
 }
 
+Obstacle *Map::getObstacleAt(Cell *cell)
+{    
+    int key = getKey(cell);
+    if(obstacles.contains(key))
+    {
+        return obstacles.get(key);
+    }
+    else return NULL;
+}
+
 bool Map::isInRange(Cell *cell) const
 {
     return cell->getX() >= 0 && cell->getX() < width &&
