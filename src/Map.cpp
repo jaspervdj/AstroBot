@@ -123,6 +123,39 @@ void Map::refresh()
     if(deleteObstacle) delete obstacle;
 }
 
+void Map::move()
+{
+    Cell next = getNextCell(robot->getCurrentPosition());
+    /* Deny move if there is an obstacle or it moves the robot out of the map.
+     */
+    int key = getKey(&next);
+    if((obstacles.contains(key) && !obstacles.get(key)->isAccessible()) ||
+            !isInRange(&next)) return;
+    
+    GUI::show(GUI::MOVE);
+    robot->addNextMove(next);
+}
+
+void Map::jump()
+{
+    Cell next = getNextCell(robot->getCurrentPosition());
+    
+    /* Don't jump if there's an obstacle which isn't jumpable */
+    int key = getKey(&next);
+    if(obstacles.contains(key) && !obstacles.get(key)->isJumpable()) return;
+    
+    /* Can only land on a cell where there's no obstacle and the cell is
+     * within the map. */
+    Cell destination = getNextCell(&next);
+    int destinationKey = getKey(&destination);
+    if((obstacles.contains(destinationKey) &&
+            !obstacles.get(destinationKey)->isAccessible()) ||
+            !isInRange(&next)) return;
+    
+    GUI::show(GUI::JUMP);
+    robot->addNextMove(destination);
+}
+
 int Map::getKey(Cell *cell) const
 {
     return cell->getY() * width + cell->getX();
@@ -156,39 +189,6 @@ bool Map::isInRange(Cell *cell) const
 {
     return cell->getX() >= 0 && cell->getX() < width &&
             cell->getY() >= 0 && cell->getY() < height;
-}
-
-void Map::move()
-{
-    Cell next = getNextCell(robot->getCurrentPosition());
-    /* Deny move if there is an obstacle or it moves the robot out of the map.
-     */
-    int key = getKey(&next);
-    if((obstacles.contains(key) && !obstacles.get(key)->isAccessible()) ||
-            !isInRange(&next)) return;
-    
-    GUI::show(GUI::MOVE);
-    robot->addNextMove(next);
-}
-
-void Map::jump()
-{
-    Cell next = getNextCell(robot->getCurrentPosition());
-    
-    /* Don't jump if there's an obstacle which isn't jumpable */
-    int key = getKey(&next);
-    if(obstacles.contains(key) && !obstacles.get(key)->isJumpable()) return;
-    
-    /* Can only land on a cell where there's no obstacle and the cell is
-     * within the map. */
-    Cell destination = getNextCell(&next);
-    int destinationKey = getKey(&destination);
-    if((obstacles.contains(destinationKey) &&
-            !obstacles.get(destinationKey)->isAccessible()) ||
-            !isInRange(&next)) return;
-    
-    GUI::show(GUI::JUMP);
-    robot->addNextMove(destination);
 }
 
 const string Map::MAP_DIR = "./maps";

@@ -44,6 +44,23 @@ class Map: public EventProducer
         void refresh();
         
         /**
+         * Move the robot forward
+         */
+        void move();
+
+        /**
+         * Makes the robot jump (over an obstacle)
+         */
+        void jump();
+
+    protected:
+        /**
+         * Get the key for a certain cell.
+         * @param The key for a certain cell.
+         */
+        int getKey(Cell *cell) const;
+    
+        /**
          * Get next position
          * @param current  Current cell
          */
@@ -61,23 +78,6 @@ class Map: public EventProducer
          */
         bool isInRange(Cell *cell) const;
 
-        /**
-         * Move the robot forward
-         */
-        void move();
-
-        /**
-         * Makes the robot jump (over an obstacle)
-         */
-        void jump();
-
-    protected:
-        /**
-         * Get the key for a certain cell.
-         * @param The key for a certain cell.
-         */
-        int getKey(Cell *cell) const;
-    
     private: 
         /** Map file base dir */
         static const std::string MAP_DIR;
