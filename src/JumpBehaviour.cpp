@@ -5,6 +5,7 @@
 
 JumpBehaviour::JumpBehaviour()
 {
+    lastJumpableObstacle = NULL;
 }
 
 JumpBehaviour::~JumpBehaviour()
@@ -13,11 +14,26 @@ JumpBehaviour::~JumpBehaviour()
 
 void JumpBehaviour::obstacleDetected(const ObstacleEvent &event)
 {
-    setActive(event.getObstacle()->isJumpable());
+    Obstacle *obstacle = event.getObstacle();
+
+    /* We just tried jumping over this obstacle, and it failed. It would be
+     * supid to fail again. */
+    if(lastJumpableObstacle && *lastJumpableObstacle == *obstacle) {
+        setActive(false);
+    } else {
+        if(obstacle->isJumpable()) {
+            lastJumpableObstacle = obstacle;
+            setActive(true);
+        } else {
+            lastJumpableObstacle = NULL;
+            setActive(false);
+        }
+    }
 }
 
 void JumpBehaviour::noObstacle()
 {
+    lastJumpableObstacle = NULL;
     setActive(false);
 }
 

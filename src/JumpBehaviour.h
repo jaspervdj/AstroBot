@@ -29,6 +29,10 @@ class JumpBehaviour: public Behaviour,
 
         /* Implementation. */
         void noObstacle();
+
+    private:
+        /** Limited memory. */
+        Obstacle *lastJumpableObstacle;
 };
 
 #endif
