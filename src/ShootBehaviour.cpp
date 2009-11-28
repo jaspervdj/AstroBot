@@ -33,6 +33,4 @@ void ShootBehaviour::action()
 {
     if(lastShootableObstacle) lastShootableObstacle->shootDown();
     GUI::show(GUI::SHOOT);
-    
-    getMap()->move();
 }
