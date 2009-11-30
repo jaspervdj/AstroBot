@@ -38,12 +38,12 @@ bool Cell::operator==(const Cell &other) const
 
 bool Cell::operator<(const Cell &other) const
 {
-    if(y < other.y) return true;
+    if(y != other.y) return y < other.y;
     else return x < other.x;
 }
 
 bool Cell::operator>(const Cell &other) const
 {
-    if(y > other.y) return true;
+    if(y != other.y) return y > other.y;
     else return x > other.x;
 }
