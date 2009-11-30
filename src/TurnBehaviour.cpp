@@ -6,7 +6,8 @@
 #include "Orientation.h"
 #include "GUI.h"
 
-TurnBehaviour::TurnBehaviour()
+TurnBehaviour::TurnBehaviour(Map *map, Robot *robot)
+        : Behaviour(map, robot)
 {
 }
 
@@ -26,7 +27,7 @@ void TurnBehaviour::noObstacle()
 
 void TurnBehaviour::action()
 {
-    Orientation current = getMap()->getRobot()->getOrientation();
+    Orientation current = robot->getOrientation();
 
     Orientation next;
     if(current == NORTH) next = EAST;
@@ -34,6 +35,6 @@ void TurnBehaviour::action()
     else if(current == SOUTH) next = WEST;
     else if(current == WEST) next = NORTH;
 
-    getMap()->getRobot()->setOrientation(next);
+    robot->setOrientation(next);
     GUI::show(GUI::ROTATE);
 }

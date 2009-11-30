@@ -14,7 +14,7 @@ class JumpBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        JumpBehaviour();
+        JumpBehaviour(Map *map, Robot *robot);
 
         /**
          * Destructor.

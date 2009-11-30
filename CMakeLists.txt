@@ -1,5 +1,3 @@
-SET(CMAKE_CXX_FLAGS "-ggdb")
-
 PROJECT(AstroBot)
 
 ADD_EXECUTABLE(
@@ -56,7 +54,5 @@ ADD_EXECUTABLE(
     src/Trench.h
     src/TurnBehaviour.cpp
     src/TurnBehaviour.h
-	src/TurnCCWBehaviour.cpp
-	src/TurnCCWBehaviour.h
     src/TemplateInstantiations.cpp
 )

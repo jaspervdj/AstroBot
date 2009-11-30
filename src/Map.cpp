@@ -78,11 +78,6 @@ Map::~Map()
     delete[] allObstacles;
 }
 
-Robot *Map::getRobot() const
-{
-    return robot;
-}
-
 void Map::setRobot(Robot *robot)
 {
     this->robot = robot;

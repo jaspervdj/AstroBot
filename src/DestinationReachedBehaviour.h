@@ -14,7 +14,7 @@ class DestinationReachedBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        DestinationReachedBehaviour();
+        DestinationReachedBehaviour(Map *map, Robot *robot);
 
         /**
          * Destructor.

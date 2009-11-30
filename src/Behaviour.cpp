@@ -1,9 +1,10 @@
 #include "Behaviour.h"
 #include "Map.h"
 
-Behaviour::Behaviour()
+Behaviour::Behaviour(Map *map, Robot *robot)
 {
-    map = NULL;
+    this->map = map;
+    this->robot = robot;
     active = false;
 }
 
@@ -19,14 +20,4 @@ bool Behaviour::isActive()
 void Behaviour::setActive(bool active)
 {
     this->active = active;
-}
-
-Map *Behaviour::getMap() const
-{
-    return map;
-}
-
-void Behaviour::setMap(Map *map)
-{
-    this->map = map;
 }

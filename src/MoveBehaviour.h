@@ -14,7 +14,7 @@ class MoveBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        MoveBehaviour();
+        MoveBehaviour(Map *map, Robot *robot);
 
         /**
          * Destructor.

@@ -2,7 +2,8 @@
 #include "Map.h"
 #include "Robot.h"
 
-DestinationReachedBehaviour::DestinationReachedBehaviour()
+DestinationReachedBehaviour::DestinationReachedBehaviour(Map *map, Robot *robot)
+        : Behaviour(map, robot)
 {
 }
 
@@ -12,7 +13,7 @@ DestinationReachedBehaviour::~DestinationReachedBehaviour()
 
 void DestinationReachedBehaviour::action()
 {
-    getMap()->getRobot()->setDestinationReached(true);
+    robot->setDestinationReached(true);
 }
 
 void DestinationReachedBehaviour::destinationReached(

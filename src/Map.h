@@ -27,12 +27,6 @@ class Map: public EventProducer
         ~Map();
 
         /**
-         * Get the robot in the map.
-         * @return The robot in the map.
-         */
-        Robot *getRobot() const;
-
-        /**
          * Assign robot instance
          * @param robot Robot to set.
          */

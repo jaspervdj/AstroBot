@@ -2,6 +2,7 @@
 #define BEHAVIOUR_H
 
 class Map;
+class Robot;
 
 #include "EventListener.h"
 
@@ -11,8 +12,10 @@ class Behaviour: public EventListener
     public:
         /**
          * Constructor.
+         * @param map Map the robot is in.
+         * @param robot Robot to control.
          */
-        Behaviour();
+        Behaviour(Map *map, Robot *robot);
 
         /**
          * Destructor.
@@ -30,28 +33,19 @@ class Behaviour: public EventListener
          */
         virtual void action() = 0;
 
-        /**
-         * Get the map for the robot.
-         * @return The map this robot is on.
-         */
-        Map *getMap() const;
-
-        /**
-         * Set the map the robot is on.
-         * @param map Map the robot is on.
-         */
-        void setMap(Map *map);
-        
     protected:
         /**
          * Mark the current behaviour as active
          */
         void setActive(bool active);
 
-    private:
         /** Map the robot is on. */
         Map *map;
 
+        /** Robot to control. */
+        Robot *robot;
+
+    private:
         /** Flag to see if this behaviour is active. */
         bool active;
 };

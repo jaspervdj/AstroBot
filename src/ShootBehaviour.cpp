@@ -4,7 +4,8 @@
 #include "Obstacle.h"
 #include "GUI.h"
 
-ShootBehaviour::ShootBehaviour()
+ShootBehaviour::ShootBehaviour(Map *map, Robot *robot)
+        : Behaviour(map, robot)
 {
     lastShootableObstacle = NULL;
 }

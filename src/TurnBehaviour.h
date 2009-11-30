@@ -14,7 +14,7 @@ class TurnBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        TurnBehaviour();
+        TurnBehaviour(Map *map, Robot *robot);
 
         /**
          * Destructor.

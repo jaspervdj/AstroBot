@@ -14,7 +14,7 @@ class ShootBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        ShootBehaviour();
+        ShootBehaviour(Map *map, Robot *robot);
 
         /**
          * Destructor.

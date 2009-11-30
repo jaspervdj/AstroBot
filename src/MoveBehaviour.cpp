@@ -3,7 +3,8 @@
 #include "Robot.h"
 #include "Obstacle.h"
 
-MoveBehaviour::MoveBehaviour()
+MoveBehaviour::MoveBehaviour(Map *map, Robot *robot)
+        : Behaviour(map, robot)
 {
 }
 
@@ -23,5 +24,5 @@ void MoveBehaviour::noObstacle()
 
 void MoveBehaviour::action()
 {
-    getMap()->move();
+    map->move();
 }

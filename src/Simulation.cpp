@@ -34,19 +34,17 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     /* Create behaviours. */
-    const int numberOfBehaviours = 6;
+    const int numberOfBehaviours = 5;
     Behaviour *behaviours[numberOfBehaviours] = {
-        new DestinationReachedBehaviour(),
-        new MoveBehaviour(),
-        new JumpBehaviour(),
-        new ShootBehaviour(),
-        new TurnCCWBehaviour(),
-        new TurnBehaviour()
+        new DestinationReachedBehaviour(map, robot),
+        new MoveBehaviour(map, robot),
+        new JumpBehaviour(map, robot),
+        new ShootBehaviour(map, robot),
+        new TurnBehaviour(map, robot)
     };
 
     /* Initialize behaviours. */
     for(int i = 0; i < numberOfBehaviours; i++) {
-        behaviours[i]->setMap(map);
         map->registerListener(behaviours[i]);
         robot->registerBehaviour(behaviours[i]);
     }

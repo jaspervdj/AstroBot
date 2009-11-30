@@ -3,7 +3,8 @@
 #include "Robot.h"
 #include "Obstacle.h"
 
-JumpBehaviour::JumpBehaviour()
+JumpBehaviour::JumpBehaviour(Map *map, Robot *robot)
+        : Behaviour(map, robot)
 {
     lastJumpableObstacle = NULL;
 }
@@ -39,5 +40,5 @@ void JumpBehaviour::noObstacle()
 
 void JumpBehaviour::action()
 {
-    getMap()->jump();
+    map->jump();
 }
