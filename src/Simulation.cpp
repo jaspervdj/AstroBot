@@ -6,7 +6,6 @@
 #include "MoveBehaviour.h"
 #include "ShootBehaviour.h"
 #include "TurnBehaviour.h"
-#include "TurnCCWBehaviour.h"
 #include "DestinationReachedBehaviour.h"
 
 #include <iostream>
