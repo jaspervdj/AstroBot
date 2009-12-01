@@ -20,15 +20,15 @@ class ShootBehaviour: public Behaviour,
          * Destructor.
          */
         virtual ~ShootBehaviour();
-        
-        /* Implementation. */
-        void action();
 
         /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);
 
         /* Implementation. */
         void noObstacle();
+        
+        /* Implementation. */
+        void action();
 
     private:
         /** Last detected shootable obstacle. NULL if no obstacle detected

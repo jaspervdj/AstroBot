@@ -27,14 +27,8 @@ void TurnBehaviour::noObstacle()
 
 void TurnBehaviour::action()
 {
-    Orientation current = robot->getOrientation();
-
-    Orientation next;
-    if(current == NORTH) next = EAST;
-    else if(current == EAST) next = SOUTH;
-    else if(current == SOUTH) next = WEST;
-    else if(current == WEST) next = NORTH;
-
+    Orientation next = (Orientation)
+            ((robot->getOrientation() + 1) % ORIENTATION_SIZE);
     robot->setOrientation(next);
     GUI::show(GUI::ROTATE);
 }

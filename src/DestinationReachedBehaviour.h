@@ -22,10 +22,10 @@ class DestinationReachedBehaviour: public Behaviour,
         virtual ~DestinationReachedBehaviour();
 
         /* Implementation. */
-        void action();
+        void destinationReached(const DestinationEvent &event);
 
         /* Implementation. */
-        void destinationReached(const DestinationEvent &event);
+        void action();
 };
 
 #endif

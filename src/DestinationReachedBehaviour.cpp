@@ -11,13 +11,13 @@ DestinationReachedBehaviour::~DestinationReachedBehaviour()
 {
 }
 
-void DestinationReachedBehaviour::action()
-{
-    robot->setDestinationReached(true);
-}
-
 void DestinationReachedBehaviour::destinationReached(
         const DestinationEvent &event)
 {
     setActive(true);
+}
+
+void DestinationReachedBehaviour::action()
+{
+    robot->setDestinationReached(true);
 }

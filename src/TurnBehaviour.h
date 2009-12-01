@@ -7,8 +7,7 @@
 /**
  * Behaviour that reacts when the destination is reached.
  */
-class TurnBehaviour: public Behaviour,
-        public ObstacleEventListener
+class TurnBehaviour: public Behaviour, public ObstacleEventListener
 {
     public:
         /**
@@ -22,13 +21,13 @@ class TurnBehaviour: public Behaviour,
         virtual ~TurnBehaviour();
 
         /* Implementation. */
-        void action();
-
-        /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);
 
         /* Implementation. */
         void noObstacle();
+
+        /* Implementation. */
+        void action();
 };
 
 #endif

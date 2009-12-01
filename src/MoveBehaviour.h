@@ -22,13 +22,13 @@ class MoveBehaviour: public Behaviour,
         virtual ~MoveBehaviour();
 
         /* Implementation. */
-        void action();
-
-        /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);
 
         /* Implementation. */
         void noObstacle();
+
+        /* Implementation. */
+        void action();
 };
 
 #endif
