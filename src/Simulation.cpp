@@ -5,6 +5,7 @@
 #include "JumpBehaviour.h"
 #include "MoveBehaviour.h"
 #include "ShootBehaviour.h"
+#include "SmartTurnBehaviour.h"
 #include "TurnBehaviour.h"
 #include "DestinationReachedBehaviour.h"
 
@@ -33,12 +34,13 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     /* Create behaviours. */
-    const int numberOfBehaviours = 5;
+    const int numberOfBehaviours = 6;
     Behaviour *behaviours[numberOfBehaviours] = {
         new DestinationReachedBehaviour(map, robot),
-        new MoveBehaviour(map, robot),
         new JumpBehaviour(map, robot),
         new ShootBehaviour(map, robot),
+        new SmartTurnBehaviour(map, robot),
+        new MoveBehaviour(map, robot),
         new TurnBehaviour(map, robot)
     };
 

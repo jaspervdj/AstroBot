@@ -1,3 +1,4 @@
+SET(CMAKE_CXX_FLAGS "-ggdb")
 PROJECT(AstroBot)
 
 ADD_EXECUTABLE(
@@ -44,6 +45,8 @@ ADD_EXECUTABLE(
     src/ShootBehaviour.h
     src/Simulation.cpp
     src/Simulation.h
+    src/SmartTurnBehaviour.cpp
+    src/SmartTurnBehaviour.h
     src/TObstacleFactory.cpp
     src/TObstacleFactory.h
     src/ThickWall.cpp

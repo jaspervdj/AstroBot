@@ -3,10 +3,12 @@
 
 enum Orientation
 {
-    NORTH,
+    ORIENTATION_START = 0,
+    NORTH = ORIENTATION_START,
     EAST,
     SOUTH,
-    WEST
+    WEST,
+    ORIENTATION_SIZE
 };
 
 #endif

@@ -167,7 +167,7 @@ typename BinarySearchTree<K, T>::TreeElement *BinarySearchTree<K, T>::find(
     /* Current search position in the tree. */
     *parent = NULL;
     TreeElement *node = root;
-    while(node && key != node->key) {
+    while(node && !(key == node->key)) {
         *parent = node;
         if(key < node->key) node = node->left;
         else node = node->right;
