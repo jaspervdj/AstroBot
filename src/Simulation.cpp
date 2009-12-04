@@ -35,12 +35,12 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     /* Create behaviours. */
-    const int numberOfBehaviours = 5;
+    const int numberOfBehaviours = 6;
     Behaviour *behaviours[numberOfBehaviours] = {
         new DestinationReachedBehaviour(map, robot),
         new JumpBehaviour(map, robot),
         new ShootBehaviour(map, robot),
-  //      new BadnessBehaviour(map, robot),
+        new BadnessBehaviour(map, robot),
         new MoveBehaviour(map, robot),
         new TurnBehaviour(map, robot)
     };

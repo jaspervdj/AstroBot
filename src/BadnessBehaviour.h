@@ -64,6 +64,9 @@ class BadnessBehaviour: public Behaviour, public ObstacleEventListener
         /** Some memory. */
         BinarySearchTree<Cell, int> badness;
 
+        /** Last seen obstacle. */
+        Cell *lastSeenObstacle;
+
         /** Number of times to turn. */
         int delta;
 };
