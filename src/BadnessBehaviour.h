@@ -1,5 +1,5 @@
-#ifndef SMARTTURNBEHAVIOUR_H
-#define SMARTTURNBEHAVIOUR_H
+#ifndef BADNESSBEHAVIOUR_H
+#define BADNESSBEHAVIOUR_H
 
 #include "Behaviour.h"
 #include "ObstacleEventListener.h"
@@ -8,18 +8,18 @@
 #include "Orientation.h"
 #include <set>
 
-class SmartTurnBehaviour: public Behaviour, public ObstacleEventListener
+class BadnessBehaviour: public Behaviour, public ObstacleEventListener
 {
     public:
         /**
          * Construcor.
          */
-        SmartTurnBehaviour(Map *map, Robot *robot);
+        BadnessBehaviour(Map *map, Robot *robot);
 
         /**
          * Destructor.
          */
-        virtual ~SmartTurnBehaviour();
+        virtual ~BadnessBehaviour();
 
         /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);

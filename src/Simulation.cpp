@@ -5,7 +5,7 @@
 #include "JumpBehaviour.h"
 #include "MoveBehaviour.h"
 #include "ShootBehaviour.h"
-#include "SmartTurnBehaviour.h"
+#include "BadnessBehaviour.h"
 #include "TurnBehaviour.h"
 #include "DestinationReachedBehaviour.h"
 
@@ -39,7 +39,7 @@ void Simulation::run()
         new DestinationReachedBehaviour(map, robot),
         new JumpBehaviour(map, robot),
         new ShootBehaviour(map, robot),
-        new SmartTurnBehaviour(map, robot),
+        new BadnessBehaviour(map, robot),
         new MoveBehaviour(map, robot),
         new TurnBehaviour(map, robot)
     };

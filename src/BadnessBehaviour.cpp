@@ -1,4 +1,4 @@
-#include "SmartTurnBehaviour.h"
+#include "BadnessBehaviour.h"
 #include "Robot.h"
 #include "GUI.h"
 #include "Obstacle.h"
@@ -7,16 +7,16 @@
 
 using namespace std;
 
-SmartTurnBehaviour::SmartTurnBehaviour(Map *map, Robot *robot)
+BadnessBehaviour::BadnessBehaviour(Map *map, Robot *robot)
         : Behaviour(map, robot)
 {
 }
 
-SmartTurnBehaviour::~SmartTurnBehaviour()
+BadnessBehaviour::~BadnessBehaviour()
 {
 }
 
-void SmartTurnBehaviour::obstacleDetected(const ObstacleEvent &event)
+void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
 {
     if(!event.getObstacle()->isAccessible() &&
             !event.getObstacle()->isJumpable() &&
@@ -28,12 +28,12 @@ void SmartTurnBehaviour::obstacleDetected(const ObstacleEvent &event)
     setActive(store());
 }
 
-void SmartTurnBehaviour::noObstacle()
+void BadnessBehaviour::noObstacle()
 {
     setActive(store());
 }
 
-void SmartTurnBehaviour::action()
+void BadnessBehaviour::action()
 {
     Orientation orientation = robot->getOrientation();
     while(delta > 0) {
@@ -45,7 +45,7 @@ void SmartTurnBehaviour::action()
     robot->setOrientation(orientation);
 }
 
-bool SmartTurnBehaviour::store()
+bool BadnessBehaviour::store()
 {
     Cell cell = *robot->getCurrentPosition();
     badness.put(cell, getBadness(cell) + 2);
@@ -69,18 +69,18 @@ bool SmartTurnBehaviour::store()
     return (delta != 0);
 }
 
-int SmartTurnBehaviour::getBadness(const Cell &cell)
+int BadnessBehaviour::getBadness(const Cell &cell)
 {
     return badness.contains(cell) ? badness.get(cell) : 0;
 }
 
-const Orientation SmartTurnBehaviour::increment(const Orientation &orientation)
+const Orientation BadnessBehaviour::increment(const Orientation &orientation)
         const
 {
     return (Orientation) ((orientation + 1) % ORIENTATION_SIZE);
 }
 
-const Cell SmartTurnBehaviour::getNeighbour(const Cell &cell,
+const Cell BadnessBehaviour::getNeighbour(const Cell &cell,
         const Orientation &orientation) const
 {
     switch(orientation) {

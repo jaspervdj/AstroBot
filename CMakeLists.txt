@@ -3,6 +3,8 @@ PROJECT(AstroBot)
 
 ADD_EXECUTABLE(
     AstroBot
+    src/BadnessBehaviour.cpp
+    src/BadnessBehaviour.h
     src/Behaviour.cpp
     src/Behaviour.h
     src/BinarySearchTree.cpp
@@ -45,8 +47,6 @@ ADD_EXECUTABLE(
     src/ShootBehaviour.h
     src/Simulation.cpp
     src/Simulation.h
-    src/SmartTurnBehaviour.cpp
-    src/SmartTurnBehaviour.h
     src/TObstacleFactory.cpp
     src/TObstacleFactory.h
     src/ThickWall.cpp
