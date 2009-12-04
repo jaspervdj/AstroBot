@@ -22,6 +22,7 @@ Simulation::Simulation(const string &fileName)
 
     /* Initialize and set the robot. */
     robot = new Robot();
+    robot->setSpeed(1);    
     map->setRobot(robot);
 }
 
@@ -34,12 +35,12 @@ Simulation::~Simulation()
 void Simulation::run()
 {
     /* Create behaviours. */
-    const int numberOfBehaviours = 6;
+    const int numberOfBehaviours = 5;
     Behaviour *behaviours[numberOfBehaviours] = {
         new DestinationReachedBehaviour(map, robot),
         new JumpBehaviour(map, robot),
         new ShootBehaviour(map, robot),
-        new BadnessBehaviour(map, robot),
+  //      new BadnessBehaviour(map, robot),
         new MoveBehaviour(map, robot),
         new TurnBehaviour(map, robot)
     };

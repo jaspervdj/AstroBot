@@ -120,15 +120,24 @@ void Map::refresh()
 
 void Map::move()
 {
-    Cell next = getNextCell(robot->getCurrentPosition());
-    /* Deny move if there is an obstacle or it moves the robot out of the map.
-     */
-    int key = getKey(&next);
-    if((obstacles.contains(key) && !obstacles.get(key)->isAccessible()) ||
-            !isInRange(&next)) return;
+    Cell last = *robot->getCurrentPosition();
+    Cell next = getNextCell(&last);
     
-    GUI::show(GUI::MOVE);
-    robot->addNextMove(next);
+    /* Deny move if there is an obstacle or it moves the robot out of the map. */
+    for(int i = 0; i < robot->getSpeed(); i++)
+    {
+        int key = getKey(&next);
+        if(isInRange(&next) && (!obstacles.contains(key) || 
+            obstacles.get(key)->isAccessible())) {
+            
+            GUI::show(GUI::MOVE);
+            
+            last = next;
+            next = getNextCell(&last);
+        }
+    }
+    
+    if(!(last == *robot->getCurrentPosition())) robot->addNextMove(last);
 }
 
 void Map::jump()
@@ -162,22 +171,12 @@ Cell Map::getNextCell(Cell *current) const
     int y = current->getY();
     
     Orientation orientation = robot->getOrientation();
-    if(orientation == NORTH) y -= robot->getSpeed();
-    else if(orientation == EAST) x += robot->getSpeed();
-    else if(orientation == SOUTH) y += robot->getSpeed();
-    else if(orientation == WEST) x -= robot->getSpeed();
+    if(orientation == NORTH) y --;
+    else if(orientation == EAST) x++;
+    else if(orientation == SOUTH) y ++;
+    else if(orientation == WEST) x --;
     
     return Cell(x, y);
-}
-
-Obstacle *Map::getObstacleAt(Cell *cell)
-{    
-    int key = getKey(cell);
-    if(obstacles.contains(key))
-    {
-        return obstacles.get(key);
-    }
-    else return NULL;
 }
 
 bool Map::isInRange(Cell *cell) const

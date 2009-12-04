@@ -59,11 +59,6 @@ class Map: public EventProducer
          * @param current  Current cell
          */
         Cell getNextCell(Cell *current) const;
-    
-        /**
-         * Get obstacle at a certain position
-         */
-        Obstacle* getObstacleAt(Cell *cell);
 
         /**
          * Check if a cell falls within the map range.
