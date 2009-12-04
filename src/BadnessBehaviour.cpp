@@ -10,19 +10,40 @@ using namespace std;
 BadnessBehaviour::BadnessBehaviour(Map *map, Robot *robot)
         : Behaviour(map, robot)
 {
+    lastSeenObstacle = NULL;
 }
 
 BadnessBehaviour::~BadnessBehaviour()
 {
+    if(lastSeenObstacle) delete lastSeenObstacle;
 }
 
 void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
 {
-    if(!event.getObstacle()->isAccessible() &&
-            !event.getObstacle()->isJumpable() &&
-            !event.getObstacle()->isShootable()) {
+    /* We meet a non-accessible object. */
+    if(!event.getObstacle()->isAccessible()) {
+
         Cell obstacle = *((Cell*) event.getObstacle());
-        badness.put(obstacle, getBadness(obstacle) + 100);
+
+        /* If we were standing before this object the last turn, we can't pass
+         * there, so we mark it as very bad. */
+        if(lastSeenObstacle && *lastSeenObstacle == obstacle)
+            badness.put(obstacle, getBadness(obstacle) + 9001);
+
+        /* Update the last seen obstacle. */
+        if(lastSeenObstacle) delete lastSeenObstacle;
+        lastSeenObstacle = new Cell(obstacle.getX(), obstacle.getY());
+
+        /* We meet a moderately bad obstacle when we cannot jump over it or
+         * shoot it. */
+        if(!event.getObstacle()->isJumpable() &&
+                !event.getObstacle()->isShootable()) {
+            badness.put(obstacle, getBadness(obstacle) + 100);
+        }
+    /* We met an obstacle we can pass. We store this as 'no obstacle'. */
+    } else {
+        if(lastSeenObstacle) delete lastSeenObstacle;
+        lastSeenObstacle = NULL;
     }
 
     setActive(store());
@@ -30,6 +51,8 @@ void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
 
 void BadnessBehaviour::noObstacle()
 {
+    if(lastSeenObstacle) delete lastSeenObstacle;
+    lastSeenObstacle = NULL;
     setActive(store());
 }
 
@@ -50,6 +73,7 @@ bool BadnessBehaviour::store()
     Cell cell = *robot->getCurrentPosition();
     badness.put(cell, getBadness(cell) + 2);
 
+    /* Find the next best orientation. */
     Orientation orientation = robot->getOrientation();
     int best = getBadness(getNeighbour(cell, orientation));
     for(Orientation o = increment(orientation); o != orientation;
@@ -61,10 +85,11 @@ bool BadnessBehaviour::store()
         }
     }
 
+    /* Calculate how many times we have to turn to obtain the next best
+     * orientation. */
     delta = orientation - robot->getOrientation();
     if(delta < ORIENTATION_START) delta += ORIENTATION_SIZE;
     Cell destination = getNeighbour(cell, orientation);
-    badness.put(destination, getBadness(destination) + 1);
 
     return (delta != 0);
 }
