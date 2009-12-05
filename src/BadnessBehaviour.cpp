@@ -1,9 +1,14 @@
+#include <iostream>
+
 #include "BadnessBehaviour.h"
 #include "Robot.h"
 #include "GUI.h"
 #include "Obstacle.h"
-#include <iostream>
-#include <iomanip>
+
+/* Over 9000 */
+#define BADNESS_VERY_BAD 9001
+#define BADNESS_MAYBE_BAD 100
+#define BADNESS_INCREMENT 2
 
 using namespace std;
 
@@ -11,24 +16,26 @@ BadnessBehaviour::BadnessBehaviour(Map *map, Robot *robot)
         : Behaviour(map, robot)
 {
     lastSeenObstacle = NULL;
+    lastDestination = NULL;
 }
 
 BadnessBehaviour::~BadnessBehaviour()
 {
     if(lastSeenObstacle) delete lastSeenObstacle;
+    if(lastDestination) delete lastDestination;
 }
 
 void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
 {
+    Cell obstacle = *((Cell*) event.getObstacle());
+
     /* We meet a non-accessible object. */
     if(!event.getObstacle()->isAccessible()) {
-
-        Cell obstacle = *((Cell*) event.getObstacle());
 
         /* If we were standing before this object the last turn, we can't pass
          * there, so we mark it as very bad. */
         if(lastSeenObstacle && *lastSeenObstacle == obstacle)
-            badness.put(obstacle, getBadness(obstacle) + 9001);
+            badness.put(obstacle, getBadness(obstacle) + BADNESS_VERY_BAD);
 
         /* Update the last seen obstacle. */
         if(lastSeenObstacle) delete lastSeenObstacle;
@@ -36,9 +43,9 @@ void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
 
         /* We meet a moderately bad obstacle when we cannot jump over it or
          * shoot it. */
-        if(!event.getObstacle()->isJumpable() &&
-                !event.getObstacle()->isShootable()) {
-            badness.put(obstacle, getBadness(obstacle) + 100);
+        if(!event.getObstacle()->isJumpable() && 
+            !event.getObstacle()->isShootable()) {
+            badness.put(obstacle, getBadness(obstacle) + BADNESS_MAYBE_BAD);
         }
     /* We met an obstacle we can pass. We store this as 'no obstacle'. */
     } else {
@@ -53,12 +60,15 @@ void BadnessBehaviour::noObstacle()
 {
     if(lastSeenObstacle) delete lastSeenObstacle;
     lastSeenObstacle = NULL;
+
     setActive(store());
 }
 
 void BadnessBehaviour::action()
 {
     Orientation orientation = robot->getOrientation();
+
+    /* Turn as determined by delta */
     while(delta > 0) {
         GUI::show(GUI::ROTATE);
         orientation = increment(orientation);
@@ -71,15 +81,24 @@ void BadnessBehaviour::action()
 bool BadnessBehaviour::store()
 {
     Cell cell = *robot->getCurrentPosition();
-    badness.put(cell, getBadness(cell) + 2);
+    badness.put(cell, getBadness(cell) + BADNESS_INCREMENT);
+
+    /* Revoke debt (should be dependent on success somehow?) */
+    if(lastDestination)
+    {
+        badness.put(*lastDestination, getBadness(*lastDestination) - 
+            BADNESS_MAYBE_BAD + BADNESS_INCREMENT);
+        delete lastDestination;
+    }
 
     /* Find the next best orientation. */
     Orientation orientation = robot->getOrientation();
     int best = getBadness(getNeighbour(cell, orientation));
+ 
     for(Orientation o = increment(orientation); o != orientation;
             o = increment(o)) {
         int b = getBadness(getNeighbour(cell, o));
-        if(b < best) {
+        if(b + BADNESS_INCREMENT < best) {
             best = b;
             orientation = o;
         }
@@ -89,7 +108,14 @@ bool BadnessBehaviour::store()
      * orientation. */
     delta = orientation - robot->getOrientation();
     if(delta < ORIENTATION_START) delta += ORIENTATION_SIZE;
+
     Cell destination = getNeighbour(cell, orientation);
+
+    /* Add a certain dept to the direction we're taking */
+    badness.put(destination, getBadness(destination) + BADNESS_MAYBE_BAD);
+        
+    /* Update the last chosen cell. */
+    lastDestination = new Cell(destination.getX(), destination.getY());
 
     return (delta != 0);
 }

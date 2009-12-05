@@ -22,7 +22,7 @@ Simulation::Simulation(const string &fileName)
 
     /* Initialize and set the robot. */
     robot = new Robot();
-    robot->setSpeed(1);    
+    robot->setSpeed(2);
     map->setRobot(robot);
 }
 

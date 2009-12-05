@@ -10,12 +10,6 @@
 
 using namespace std;
 
-/**
- * TODO
- * - nieuw behaviour
- * - werken met ctrl-c?
- */
-
 int main(int argc, char** argv)
 {
     if(argc != 2) {

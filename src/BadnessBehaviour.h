@@ -6,7 +6,6 @@
 #include "BinarySearchTree.h"
 #include "Cell.h"
 #include "Orientation.h"
-#include <set>
 
 class BadnessBehaviour: public Behaviour, public ObstacleEventListener
 {
@@ -66,6 +65,9 @@ class BadnessBehaviour: public Behaviour, public ObstacleEventListener
 
         /** Last seen obstacle. */
         Cell *lastSeenObstacle;
+
+        /** Last cell chosen to continue on */
+        Cell *lastDestination;
 
         /** Number of times to turn. */
         int delta;
