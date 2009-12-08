@@ -50,12 +50,12 @@ Map::Map(const string &fileName)
             string type;
             file >> type;
             /* Factory found, let it create an object. */
-            if(factories->contains(type)) {
-                ObstacleFactory *factory = factories->get(type);
+            ObstacleFactory **factory = factories->find(type);
+            if(factory) {
                 int x, y;
                 file >> x >> y;
-                Obstacle *obstacle = factory->createObstacle(x, y);
-                obstacles.put(getKey(obstacle), obstacle);
+                Obstacle *obstacle = (*factory)->createObstacle(x, y);
+                obstacles.insert(getKey(obstacle), obstacle);
             /* No such obstacle. */
             } else {
                 cerr << "Warning: no obstacle of type \"" <<
@@ -96,28 +96,30 @@ void Map::refresh()
         fireDestinationReached(event);
     }
 
-    Obstacle *obstacle = NULL;
-    bool deleteObstacle = false;
     int key = getKey(&next);
+    Obstacle **obstacle = obstacles.find(key);
 
-    if(obstacles.contains(key)) {
-        obstacle = obstacles.get(key);
+    /* Used when we have to create a new obstacle. */
+    Obstacle *tmp;
+    bool deleteObstacle = false;
+
     /* Not in range, create a virtual obstacle. */
-    } else if(!isInRange(&next)) {
-        obstacle = new ThickWall(next.getX(), next.getY());
+    if(!obstacle && !isInRange(&next)) {
+        tmp = new ThickWall(next.getX(), next.getY());
+        obstacle = &tmp;
         deleteObstacle = true;
     }
 
     /* Found obstacle, we're going to need some events. */
     if(obstacle) {
-        ObstacleEvent event(obstacle);
-        fireObstacleDetected(obstacle);
+        ObstacleEvent event(*obstacle);
+        fireObstacleDetected(*obstacle);
     /* No obstacle, fire some events as well. */
     } else {
         fireNoObstacle();
     }
 
-    if(deleteObstacle) delete obstacle;
+    if(deleteObstacle) delete tmp;
 }
 
 void Map::move()
@@ -125,12 +127,13 @@ void Map::move()
     Cell last = *robot->getCurrentPosition();
     Cell next = getNextCell(&last);
     
-    /* Deny move if there is an obstacle or it moves the robot out of the map. */
+    /* Deny move if there is an obstacle or it moves the robot out of the map.
+     */
     for(int i = 0; i < robot->getSpeed(); i++)
     {
         int key = getKey(&next);
-        if(isInRange(&next) && (!obstacles.contains(key) || 
-            obstacles.get(key)->isAccessible())) {
+        Obstacle **obstacle = obstacles.find(key);
+        if(isInRange(&next) && (!obstacle || (*obstacle)->isAccessible())) {
             
             GUI::show(GUI::MOVE);
             
@@ -148,15 +151,15 @@ void Map::jump()
     
     /* Don't jump if there's an obstacle which isn't jumpable */
     int key = getKey(&next);
-    if(obstacles.contains(key) && !obstacles.get(key)->isJumpable()) return;
+    Obstacle **obstacle = obstacles.find(key);
+    if(obstacle && !(*obstacle)->isJumpable()) return;
     
     /* Can only land on a cell where there's no obstacle and the cell is
      * within the map. */
     Cell destination = getNextCell(&next);
     int destinationKey = getKey(&destination);
-    if((obstacles.contains(destinationKey) &&
-            !obstacles.get(destinationKey)->isAccessible()) ||
-            !isInRange(&next)) return;
+    obstacle = obstacles.find(destinationKey);
+    if((obstacle && !(*obstacle)->isAccessible()) || !isInRange(&next)) return;
     
     GUI::show(GUI::JUMP);
     robot->addNextMove(destination);
@@ -195,13 +198,13 @@ BinarySearchTree<string, ObstacleFactory*> *createObstacleFactories()
     static BinarySearchTree<string, ObstacleFactory*> factories;
 
     static ThickWallObstacleFactory thickWallObstacleFactory;
-    factories.put("thick_wall", &thickWallObstacleFactory);
+    factories.insert("thick_wall", &thickWallObstacleFactory);
 
     static ThinWallObstacleFactory thinWallObstacleFactory;
-    factories.put("thin_wall", &thinWallObstacleFactory);
+    factories.insert("thin_wall", &thinWallObstacleFactory);
 
     static TrenchObstacleFactory trenchObstacleFactory;
-    factories.put("trench", &trenchObstacleFactory);
+    factories.insert("trench", &trenchObstacleFactory);
 
     return &factories;
 }
