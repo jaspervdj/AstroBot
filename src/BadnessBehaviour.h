@@ -13,12 +13,15 @@ class BadnessBehaviour: public Behaviour, public ObstacleEventListener
         /**
          * Construcor.
          */
-        BadnessBehaviour(Map *map, Robot *robot);
+        BadnessBehaviour(Robot *robot);
 
         /**
          * Destructor.
          */
         virtual ~BadnessBehaviour();
+
+        /* Implementation. */
+        bool isActive();
 
         /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);
@@ -27,7 +30,7 @@ class BadnessBehaviour: public Behaviour, public ObstacleEventListener
         void noObstacle();
 
         /* Implementation. */
-        void action();
+        void action();        
 
     protected:
         /**
@@ -60,6 +63,12 @@ class BadnessBehaviour: public Behaviour, public ObstacleEventListener
                 const Orientation &orientation) const;
 
     private:
+        /** Robot to control. */
+        Robot *robot;
+    
+        /** Flag to see if this behaviour is active. */
+        bool active;
+
         /** Some memory. */
         BinarySearchTree<Cell, int> badness;
 

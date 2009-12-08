@@ -12,17 +12,23 @@
 
 using namespace std;
 
-BadnessBehaviour::BadnessBehaviour(Map *map, Robot *robot)
-        : Behaviour(map, robot)
+BadnessBehaviour::BadnessBehaviour(Robot *robot) : Behaviour()
 {
+    this->robot = robot;
     lastSeenObstacle = NULL;
     lastDestination = NULL;
+    active = false;
 }
 
 BadnessBehaviour::~BadnessBehaviour()
 {
     if(lastSeenObstacle) delete lastSeenObstacle;
     if(lastDestination) delete lastDestination;
+}
+
+bool BadnessBehaviour::isActive()
+{
+    return active;
 }
 
 void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
@@ -53,7 +59,7 @@ void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
         lastSeenObstacle = NULL;
     }
 
-    setActive(store());
+    active = store();
 }
 
 void BadnessBehaviour::noObstacle()
@@ -61,7 +67,7 @@ void BadnessBehaviour::noObstacle()
     if(lastSeenObstacle) delete lastSeenObstacle;
     lastSeenObstacle = NULL;
 
-    setActive(store());
+    active = store();
 }
 
 void BadnessBehaviour::action()

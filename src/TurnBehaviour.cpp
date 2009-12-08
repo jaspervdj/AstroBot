@@ -1,28 +1,33 @@
 #include "TurnBehaviour.h"
-#include "Map.h"
 #include "Robot.h"
 #include "ObstacleEvent.h"
 #include "Obstacle.h"
 #include "Orientation.h"
 #include "GUI.h"
 
-TurnBehaviour::TurnBehaviour(Map *map, Robot *robot)
-        : Behaviour(map, robot)
+TurnBehaviour::TurnBehaviour(Robot *robot) : Behaviour()
 {
+    this->robot = robot;
+    active = false;
 }
 
 TurnBehaviour::~TurnBehaviour()
 {
 }
 
+bool TurnBehaviour::isActive()
+{
+    return active;
+}
+
 void TurnBehaviour::obstacleDetected(const ObstacleEvent &event)
 {
-    setActive(true);
+    active = true;
 }
 
 void TurnBehaviour::noObstacle()
 {
-    setActive(false);
+    active = false;
 }
 
 void TurnBehaviour::action()

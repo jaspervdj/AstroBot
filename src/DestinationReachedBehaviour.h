@@ -14,7 +14,7 @@ class DestinationReachedBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        DestinationReachedBehaviour(Map *map, Robot *robot);
+        DestinationReachedBehaviour(Robot *robot);
 
         /**
          * Destructor.
@@ -22,10 +22,20 @@ class DestinationReachedBehaviour: public Behaviour,
         virtual ~DestinationReachedBehaviour();
 
         /* Implementation. */
+        bool isActive();
+
+        /* Implementation. */
         void destinationReached(const DestinationEvent &event);
 
         /* Implementation. */
         void action();
+
+     private:
+        /** Robot to control. */
+        Robot *robot;
+    
+        /** Flag to see if this behaviour is active. */
+        bool active;
 };
 
 #endif

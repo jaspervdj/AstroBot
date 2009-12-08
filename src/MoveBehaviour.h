@@ -14,12 +14,15 @@ class MoveBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        MoveBehaviour(Map *map, Robot *robot);
+        MoveBehaviour(Map *map);
 
         /**
          * Destructor.
          */
         virtual ~MoveBehaviour();
+
+        /* Implementation. */
+        bool isActive();
 
         /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);
@@ -29,6 +32,13 @@ class MoveBehaviour: public Behaviour,
 
         /* Implementation. */
         void action();
+
+     private:
+        /** Map the robot is on. */
+        Map *map;
+    
+        /** Flag to see if this behaviour is active. */
+        bool active;
 };
 
 #endif

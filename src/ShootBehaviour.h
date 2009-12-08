@@ -14,12 +14,15 @@ class ShootBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        ShootBehaviour(Map *map, Robot *robot);
+        ShootBehaviour();
 
         /**
          * Destructor.
          */
         virtual ~ShootBehaviour();
+
+        /* Implementation. */
+        bool isActive();
 
         /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);
@@ -34,6 +37,9 @@ class ShootBehaviour: public Behaviour,
         /** Last detected shootable obstacle. NULL if no obstacle detected
          *  during last scan. */
         Obstacle *lastShootableObstacle;
+
+        /** Flag to see if this behaviour is active. */
+        bool active;
 };
 
 #endif

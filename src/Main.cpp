@@ -34,12 +34,12 @@ int main(int argc, char** argv)
         /* Create behaviours. */
         const int numberOfBehaviours = 6;
         Behaviour *behaviours[numberOfBehaviours] = {
-            new DestinationReachedBehaviour(&map, &robot),
-            new JumpBehaviour(&map, &robot),
-            new ShootBehaviour(&map, &robot),
-            new BadnessBehaviour(&map, &robot),
-            new MoveBehaviour(&map, &robot),
-            new TurnBehaviour(&map, &robot)
+            new DestinationReachedBehaviour(&robot),
+            new JumpBehaviour(&map),
+            new ShootBehaviour(),
+            new BadnessBehaviour(&robot),
+            new MoveBehaviour(&map),
+            new TurnBehaviour(&robot)
         };
 
         /* Initialize behaviours. */

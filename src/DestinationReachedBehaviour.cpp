@@ -1,20 +1,26 @@
 #include "DestinationReachedBehaviour.h"
-#include "Map.h"
 #include "Robot.h"
 
-DestinationReachedBehaviour::DestinationReachedBehaviour(Map *map, Robot *robot)
-        : Behaviour(map, robot)
+DestinationReachedBehaviour::DestinationReachedBehaviour(Robot *robot)
+        : Behaviour()
 {
+    this->robot = robot;
+    active = false;
 }
 
 DestinationReachedBehaviour::~DestinationReachedBehaviour()
 {
 }
 
+bool DestinationReachedBehaviour::isActive()
+{
+    return active;
+}
+
 void DestinationReachedBehaviour::destinationReached(
         const DestinationEvent &event)
 {
-    setActive(true);
+    active = true;
 }
 
 void DestinationReachedBehaviour::action()

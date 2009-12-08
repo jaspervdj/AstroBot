@@ -1,17 +1,20 @@
 #include "ShootBehaviour.h"
-#include "Map.h"
-#include "Robot.h"
 #include "Obstacle.h"
 #include "GUI.h"
 
-ShootBehaviour::ShootBehaviour(Map *map, Robot *robot)
-        : Behaviour(map, robot)
+ShootBehaviour::ShootBehaviour() : Behaviour()
 {
     lastShootableObstacle = NULL;
+    active = false;
 }
 
 ShootBehaviour::~ShootBehaviour()
 {
+}
+
+bool ShootBehaviour::isActive()
+{
+    return active;
 }
 
 void ShootBehaviour::obstacleDetected(const ObstacleEvent &event)
@@ -21,13 +24,13 @@ void ShootBehaviour::obstacleDetected(const ObstacleEvent &event)
         lastShootableObstacle = obstacle;
     else
         lastShootableObstacle = NULL;
-    setActive(lastShootableObstacle != NULL);
+    active = (lastShootableObstacle != NULL);
 }
 
 void ShootBehaviour::noObstacle()
 {
     lastShootableObstacle = NULL;
-    setActive(false);
+    active = false;
 }
 
 void ShootBehaviour::action()

@@ -3,23 +3,29 @@
 #include "Robot.h"
 #include "Obstacle.h"
 
-MoveBehaviour::MoveBehaviour(Map *map, Robot *robot)
-        : Behaviour(map, robot)
+MoveBehaviour::MoveBehaviour(Map *map) : Behaviour()
 {
+    this->map = map;
+    active = false;
 }
 
 MoveBehaviour::~MoveBehaviour()
 {
 }
 
+bool MoveBehaviour::isActive()
+{
+    return active;
+}
+
 void MoveBehaviour::obstacleDetected(const ObstacleEvent &event)
 {
-    setActive(event.getObstacle()->isAccessible());
+    active = event.getObstacle()->isAccessible();
 }
 
 void MoveBehaviour::noObstacle()
 {
-    setActive(true);
+    active = true;
 }
 
 void MoveBehaviour::action()

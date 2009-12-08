@@ -1,16 +1,21 @@
 #include "JumpBehaviour.h"
 #include "Map.h"
-#include "Robot.h"
 #include "Obstacle.h"
 
-JumpBehaviour::JumpBehaviour(Map *map, Robot *robot)
-        : Behaviour(map, robot)
+JumpBehaviour::JumpBehaviour(Map *map) : Behaviour()
 {
+    this->map = map;
     lastJumpableObstacle = NULL;
+    active = false;
 }
 
 JumpBehaviour::~JumpBehaviour()
 {
+}
+
+bool JumpBehaviour::isActive()
+{
+    return active;
 }
 
 void JumpBehaviour::obstacleDetected(const ObstacleEvent &event)
@@ -20,14 +25,14 @@ void JumpBehaviour::obstacleDetected(const ObstacleEvent &event)
     /* We just tried jumping over this obstacle, and it failed. It would be
      * supid to fail again. */
     if(lastJumpableObstacle && *lastJumpableObstacle == *obstacle) {
-        setActive(false);
+        active = false;
     } else {
         if(obstacle->isJumpable()) {
             lastJumpableObstacle = obstacle;
-            setActive(true);
+            active = true;
         } else {
             lastJumpableObstacle = NULL;
-            setActive(false);
+            active = false;
         }
     }
 }
@@ -35,7 +40,7 @@ void JumpBehaviour::obstacleDetected(const ObstacleEvent &event)
 void JumpBehaviour::noObstacle()
 {
     lastJumpableObstacle = NULL;
-    setActive(false);
+    active = false;
 }
 
 void JumpBehaviour::action()

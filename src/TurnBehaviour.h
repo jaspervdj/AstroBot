@@ -13,12 +13,15 @@ class TurnBehaviour: public Behaviour, public ObstacleEventListener
         /**
          * Constructor.
          */
-        TurnBehaviour(Map *map, Robot *robot);
+        TurnBehaviour(Robot *robot);
 
         /**
          * Destructor.
          */
         virtual ~TurnBehaviour();
+
+        /* Implementation. */
+        bool isActive();
 
         /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);
@@ -28,6 +31,13 @@ class TurnBehaviour: public Behaviour, public ObstacleEventListener
 
         /* Implementation. */
         void action();
+
+    private:
+        /** Robot to control. */
+        Robot *robot;
+    
+        /** Flag to see if this behaviour is active. */
+        bool active;
 };
 
 #endif

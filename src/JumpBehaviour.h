@@ -14,12 +14,15 @@ class JumpBehaviour: public Behaviour,
         /**
          * Constructor.
          */
-        JumpBehaviour(Map *map, Robot *robot);
+        JumpBehaviour(Map *map);
 
         /**
          * Destructor.
          */
         virtual ~JumpBehaviour();
+
+        /* Implementation. */
+        bool isActive();
 
         /* Implementation. */
         void obstacleDetected(const ObstacleEvent &event);
@@ -33,6 +36,15 @@ class JumpBehaviour: public Behaviour,
     private:
         /** Limited memory. */
         Obstacle *lastJumpableObstacle;
+
+        /** Map the robot is on. */
+        Map *map;
+
+        /** Robot to control. */
+        Robot *robot;
+    
+        /** Flag to see if this behaviour is active. */
+        bool active;
 };
 
 #endif
