@@ -63,6 +63,8 @@ Map::Map(const string &fileName)
             }
         }
     }
+
+    GUI::initialize(fileName);
 }
 
 Map::~Map()
