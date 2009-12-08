@@ -17,11 +17,11 @@ BinarySearchTree<K, T>::~BinarySearchTree()
 }
 
 template<class K, class T>
-void BinarySearchTree<K, T>::put(const K &key, const T &value)
+void BinarySearchTree<K, T>::insert(const K &key, const T &value)
 {
     /* Find a good position. */
     TreeElement *parent;
-    TreeElement *node = find(key, &parent);
+    TreeElement *node = get(key, &parent);
 
     /* Key exists, override value. */
     if(node) {
@@ -46,70 +46,21 @@ template<class K, class T>
 bool BinarySearchTree<K, T>::contains(const K &key)
 {
     TreeElement *parent;
-    TreeElement *node = find(key, &parent);
+    TreeElement *node = get(key, &parent);
     splay(node);
     return node != NULL;
 }
 
 template<class K, class T>
-void BinarySearchTree<K, T>::remove(const K &key)
+T *BinarySearchTree<K, T>::find(const K &key)
 {
     TreeElement *parent;
-    TreeElement *node = find(key, &parent);
-
-    /* Cannot remove a non-existant node. */
-    if(!node) return;
-
-    /* Copy the key/value from lower node, then continue with the lower node. */
-    if(node->right && node->left) {
-        TreeElement *originalNode = node;
-
-        parent = node;
-        node = node->right;
-        while(node->left) {
-            parent = node;
-            node = node->left;
-        }
-
-        originalNode->key = node->key;
-        originalNode->value = node->value;
-    }
-
-    /* Keep original left and right, then remove them from the node so they
-     * will not be deleted when we delete the node. */
-    TreeElement *left = node->left, *right = node->right;
-    node->setLeft(NULL);
-    node->setRight(NULL);
-    delete node;
-
-    /* Get the element that could be not null and set it. */
-    TreeElement *maybeNotNull = !left ? right : left;
-    if(!parent) root = maybeNotNull;
-    else if(parent->left == node) parent->setLeft(maybeNotNull);
-    else parent->setRight(maybeNotNull);
-    
-    /* One element less in the tree. */
-    size--;
-}
-
-template<class K, class T>
-T BinarySearchTree<K, T>::get(const K &key)
-{
-    TreeElement *parent;
-    TreeElement *node = find(key, &parent);
+    TreeElement *node = get(key, &parent);
     splay(node);
     if(node != NULL) {
-        return node->value;
+        return &(node->value);
     } else {
-        class ElementNotFoundException: public exception
-        {
-            char *what()
-            {
-                return "Element not found.";
-            }
-        };
-
-        throw ElementNotFoundException();
+        return NULL;
     }
 }
 
@@ -160,7 +111,7 @@ void BinarySearchTree<K, T>::TreeElement::setRight(
 }
 
 template<class K, class T>
-typename BinarySearchTree<K, T>::TreeElement *BinarySearchTree<K, T>::find(
+typename BinarySearchTree<K, T>::TreeElement *BinarySearchTree<K, T>::get(
         const K &key,
         typename BinarySearchTree::TreeElement **parent)
 {

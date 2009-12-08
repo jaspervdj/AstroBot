@@ -25,7 +25,7 @@ class BinarySearchTree
          * @param key Key to insert.
          * @param value Value to insert.
          */
-        void put(const K &key, const T &value);
+        void insert(const K &key, const T &value);
 
         /** 
          * Check if a certain key exists in the tree.
@@ -35,17 +35,11 @@ class BinarySearchTree
         bool contains(const K &key);
 
         /**
-         * Remove an element from the tree.
-         * @param key Key to remove.
-         */
-        void remove(const K &key);
-
-        /**
          * Get a certain value from the tree.
          * @param key Key to check.
          * @return Pointer to value of the associated key. NULL if not found.
          */
-        T get(const K &key);
+        T *find(const K &key);
 
         /**
          * Get all values from the tree.
@@ -54,7 +48,7 @@ class BinarySearchTree
          */
         T *getAllValues(int &arraySize) const;
 
-    protected:
+    private:
         /**
          * An element in the tree.
          */
@@ -99,7 +93,7 @@ class BinarySearchTree
          * @param parent Will contain the parent of the found node.
          * @return The requested element.
          */
-        TreeElement *find(const K &key, TreeElement **parent);
+        TreeElement *get(const K &key, TreeElement **parent);
 
         /**
          * Splay the node once.
@@ -128,7 +122,6 @@ class BinarySearchTree
          */
         void getAllValues(T *array, int &position, TreeElement *node) const;
 
-    private:
         /** Root of the tree. */
         TreeElement *root;
 

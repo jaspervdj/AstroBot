@@ -35,7 +35,7 @@ void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
         /* If we were standing before this object the last turn, we can't pass
          * there, so we mark it as very bad. */
         if(lastSeenObstacle && *lastSeenObstacle == obstacle)
-            badness.put(obstacle, getBadness(obstacle) + BADNESS_VERY_BAD);
+            badness.insert(obstacle, getBadness(obstacle) + BADNESS_VERY_BAD);
 
         /* Update the last seen obstacle. */
         if(lastSeenObstacle) delete lastSeenObstacle;
@@ -45,7 +45,7 @@ void BadnessBehaviour::obstacleDetected(const ObstacleEvent &event)
          * shoot it. */
         if(!event.getObstacle()->isJumpable() && 
             !event.getObstacle()->isShootable()) {
-            badness.put(obstacle, getBadness(obstacle) + BADNESS_MAYBE_BAD);
+            badness.insert(obstacle, getBadness(obstacle) + BADNESS_MAYBE_BAD);
         }
     /* We met an obstacle we can pass. We store this as 'no obstacle'. */
     } else {
@@ -81,12 +81,12 @@ void BadnessBehaviour::action()
 bool BadnessBehaviour::store()
 {
     Cell cell = *robot->getCurrentPosition();
-    badness.put(cell, getBadness(cell) + BADNESS_INCREMENT);
+    badness.insert(cell, getBadness(cell) + BADNESS_INCREMENT);
 
     /* Revoke debt (should be dependent on success somehow?) */
     if(lastDestination)
     {
-        badness.put(*lastDestination, getBadness(*lastDestination) - 
+        badness.insert(*lastDestination, getBadness(*lastDestination) - 
             BADNESS_MAYBE_BAD + BADNESS_INCREMENT);
         delete lastDestination;
     }
@@ -112,7 +112,7 @@ bool BadnessBehaviour::store()
     Cell destination = getNeighbour(cell, orientation);
 
     /* Add a certain dept to the direction we're taking */
-    badness.put(destination, getBadness(destination) + BADNESS_MAYBE_BAD);
+    badness.insert(destination, getBadness(destination) + BADNESS_MAYBE_BAD);
         
     /* Update the last chosen cell. */
     lastDestination = new Cell(destination.getX(), destination.getY());
@@ -122,7 +122,8 @@ bool BadnessBehaviour::store()
 
 int BadnessBehaviour::getBadness(const Cell &cell)
 {
-    return badness.contains(cell) ? badness.get(cell) : 0;
+    int *b = badness.find(cell);
+    return b ? *b : 0;
 }
 
 const Orientation BadnessBehaviour::increment(const Orientation &orientation)
