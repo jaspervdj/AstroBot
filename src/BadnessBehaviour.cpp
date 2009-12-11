@@ -89,7 +89,7 @@ bool BadnessBehaviour::store()
     Cell cell = *robot->getCurrentPosition();
     badness.insert(cell, getBadness(cell) + BADNESS_INCREMENT);
 
-    /* Revoke debt (should be dependent on success somehow?) */
+    /* Revoke debt. */
     if(lastDestination)
     {
         badness.insert(*lastDestination, getBadness(*lastDestination) - 
