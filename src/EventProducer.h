@@ -25,6 +25,7 @@ class EventProducer
          */
         void registerListener(EventListener *listener);
 
+    protected:
         /**
          * Fire a destinationReached event.
          * @param event Event containing more information.
