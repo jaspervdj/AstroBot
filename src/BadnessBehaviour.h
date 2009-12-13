@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * BadnessBehaviour.h
+ */
 #ifndef BADNESSBEHAVIOUR_H
 #define BADNESSBEHAVIOUR_H
 

@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * TObstacleFactory.h
+ */
 #ifndef TOBSTACLEFACTORY_H
 #define TOBSTACLEFACTORY_H
 

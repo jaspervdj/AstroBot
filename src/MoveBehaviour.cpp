@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * MoveBehaviour.cpp
+ */
 #include "MoveBehaviour.h"
 #include "Map.h"
 #include "Robot.h"

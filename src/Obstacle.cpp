@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Obstacle.cpp
+ */
 #include "Obstacle.h"
 
 Obstacle::Obstacle(int x, int y) : Cell(x, y)

@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * DestinationEvent.cpp
+ */
 #include "DestinationEvent.h"
 #include "Cell.h"
 

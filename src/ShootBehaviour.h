@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * ShootBehaviour.h
+ */
 #ifndef SHOOTBEHAVIOUR_H
 #define SHOOTBEHAVIOUR_H
 

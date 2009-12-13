@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * ThinWall.h
+ */
 #ifndef THINWALL_H
 #define THINWALL_H
 

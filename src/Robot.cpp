@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Robot.cpp
+ */
 #include "Robot.h"
 #include "Orientation.h"
 #include "Cell.h"

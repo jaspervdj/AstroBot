@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * DestinationReachedBehaviour.h
+ */
 #ifndef DESTINATIONREACHEDBEHAVIOUR_H
 #define DESTINATIONREACHEDBEHAVIOUR_H
 

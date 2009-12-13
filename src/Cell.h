@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Cell.h
+ */
 #ifndef CELL_H
 #define CELL_H
 

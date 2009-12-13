@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * TemplateInstantiations.cpp
+ */
 #include "BinarySearchTree.cpp"
 #include <string>
 #include <set>

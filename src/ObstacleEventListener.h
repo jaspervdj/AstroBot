@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * ObstacleEventListener.h
+ */
 #ifndef OBSTACLEEVENTLISTENER_H
 #define OBSTACLEEVENTLISTENER_H
 

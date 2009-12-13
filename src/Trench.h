@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Trench.h
+ */
 #ifndef TRENCH_H
 #define TRENCH_H
 

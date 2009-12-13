@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * BadnessBehaviour.cpp
+ */
 #include <iostream>
 
 #include "BadnessBehaviour.h"

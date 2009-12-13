@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Robot.h
+ */
 #ifndef ROBOT_H
 #define ROBOT_H
 

@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * ShootBehaviour.cpp
+ */
 #include "ShootBehaviour.h"
 #include "Obstacle.h"
 #include "GUI.h"

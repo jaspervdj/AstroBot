@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Behaviour.h
+ */
 #ifndef BEHAVIOUR_H
 #define BEHAVIOUR_H
 

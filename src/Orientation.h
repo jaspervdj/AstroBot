@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Orientation.h
+ */
 #ifndef ORIENTATION_H
 #define ORIENTATION_H
 

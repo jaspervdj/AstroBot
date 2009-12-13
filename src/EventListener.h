@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * EventListener.h
+ */
 #ifndef EVENTLISTENER_H
 #define EVENTLISTENER_H
 

@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * MoveBehaviour.h
+ */
 #ifndef MOVEBEHAVIOUR_H
 #define MOVEBEHAVIOUR_H
 

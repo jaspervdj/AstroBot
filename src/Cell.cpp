@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Cell.cpp
+ */
 #include "Cell.h"
 
 Cell::Cell(int x, int y)

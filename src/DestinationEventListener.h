@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * DestinationEventListener.h
+ */
 #ifndef DESTINATIONEVENTLISTENER_H
 #define DESTINATIONEVENTLISTENER_H
 

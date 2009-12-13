@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Map.h
+ */
 #ifndef MAP_H
 #define MAP_H
 

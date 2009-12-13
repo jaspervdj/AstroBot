@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * ThinWall.cpp
+ */
 #include "ThinWall.h"
 
 ThinWall::ThinWall(int x, int y): Obstacle(x, y)

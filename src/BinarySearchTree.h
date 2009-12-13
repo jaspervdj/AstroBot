@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * BinarySearchTree.h
+ */
 #ifndef BINARYSEARCHTREE_H
 #define BINARYSEARCHTREE_H
 

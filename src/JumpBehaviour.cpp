@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * JumpBehaviour.cpp
+ */
 #include "JumpBehaviour.h"
 #include "Map.h"
 #include "Obstacle.h"

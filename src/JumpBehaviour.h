@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * JumpBehaviour.h
+ */
 #ifndef JUMPBEHAVIOUR_H
 #define JUMPBEHAVIOUR_H
 

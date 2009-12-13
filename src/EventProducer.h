@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * EventProducer.h
+ */
 #ifndef EVENTPRODUCER_H
 #define EVENTPRODUCER_H
 

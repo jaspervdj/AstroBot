@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Map.cpp
+ */
 #include <iostream>
 #include <cstdlib>
 #include <fstream>

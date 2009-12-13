@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * TurnBehaviour.h
+ */
 #ifndef TURNBEHAVIOUR_H
 #define TURNBEHAVIOUR_H
 

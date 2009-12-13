@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * EventProducer.cpp
+ */
 #include "EventProducer.h"
 #include "EventListener.h"
 #include "ObstacleEventListener.h"

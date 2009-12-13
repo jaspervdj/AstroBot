@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Obstacle.h
+ */
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 

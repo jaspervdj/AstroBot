@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * TObstacleFactory.cpp
+ */
 #include "TObstacleFactory.h"
 
 template<class T>

@@ -1,3 +1,9 @@
+/**
+ * Pieter De Baets
+ * Jasper Van der Jeugt
+ * Groep 31
+ * Main.cpp
+ */
 #include <iostream>
 #include <stdlib.h>
 #include <string>
